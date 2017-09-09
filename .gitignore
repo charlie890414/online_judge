@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.vscode/
 env/
 build/
 develop-eggs/
@@ -122,6 +123,7 @@ Temporary Items
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+*.sqlite3
 
 # Folder config file
 Desktop.ini
