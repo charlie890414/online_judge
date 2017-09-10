@@ -12,10 +12,13 @@ def signup(request):
     if request.method == 'GET':
         return render(request,'signup.html')
     elif request.method == 'POST':
-        
-        print(request.POST)           
-        
-        return redirect('/')
+        try:
+            print(request.POST)  
+            if request.POST['password'] == request.POST['password']:      
+                new_user = User.objects.create(username=request.POST['username'],email=request.POST['email'],password=request.POST['Password'])
+                print('suscess')
+        finally:  
+            return redirect('/')
 def signin(request):
     return render(request,'signin.html')
 
