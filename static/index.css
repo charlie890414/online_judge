@@ -51,12 +51,12 @@ div > ul {
 
 	.sign {
 		position:absolute;
-		right: 100px;
+		right: 10px;
 	}
 
 	.signup { 
-		position:absolute; 
-		right: 20px; 
+		position:relative; 
+		right: -720px; 
 	   }
 
 	.clear { 
