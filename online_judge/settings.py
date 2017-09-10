@@ -50,9 +50,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'template'),
-)
 
 ROOT_URLCONF = 'online_judge.urls'
 
