@@ -20,7 +20,7 @@ def login(request):
         return HttpResponseRedirect('/index/')
     else:
         return render(request,'login.html')
-def signup(request):
+def post_signup(request):
     
     if request.user.is_authenticated():
         return HttpResponseRedirect('/index/')
@@ -29,7 +29,11 @@ def signup(request):
     email = request.POST.get('email', '')
     password = request.POST.get('password', '')
     
-    
+def signup(request):
+    return render(request , 'signup.html')
+
+def signin(request):
+    return render(request , 'signin.html')
 
 def index(request):
     return render(request,'index.html')

@@ -56,6 +56,7 @@ TEMPLATE_DIRS = (
 
 ROOT_URLCONF = 'online_judge.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
