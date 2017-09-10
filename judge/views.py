@@ -6,7 +6,6 @@ from django.shortcuts import redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth  # 別忘了import auth
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 
 def signup(request):
     if request.method == 'GET':
@@ -14,7 +13,7 @@ def signup(request):
     elif request.method == 'POST':
         try:
             print(request.POST)  
-            if request.POST['password'] == request.POST['password']:      
+            if request.POST['password'] == request.POST['repassword']:      
                 new_user = User.objects.create(username=request.POST['username'],email=request.POST['email'],password=request.POST['Password'])
                 print('suscess')
         finally:  
