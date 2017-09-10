@@ -54,6 +54,11 @@ div > ul {
 		right: 10px;
 	}
 
+	.signup { 
+		position:relative; 
+		right: -720px; 
+	   }
+
 	.clear { 
 		clear: both;
 	}
