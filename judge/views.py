@@ -2,13 +2,14 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth  # 別忘了import auth
+from django.contrib.auth.forms import UserCreationForm
 
 def login(request):
 
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/index/')
+        return HttpResponseRedirect('/')
 
     email = request.POST.get('email', '')
     password = request.POST.get('password', '')
@@ -17,23 +18,9 @@ def login(request):
 
     if user is not None and user.is_active:
         auth.login(request, user)
-        return HttpResponseRedirect('/index/')
+        return HttpResponseRedirect('/')
     else:
         return render(request,'login.html')
-def post_signup(request):
-    
-    if request.user.is_authenticated():
-        return HttpResponseRedirect('/index/')
-
-    name = requst.POST.get('name','')
-    email = request.POST.get('email', '')
-    password = request.POST.get('password', '')
-    
-def signup(request):
-    return render(request , 'signup.html')
-
-def signin(request):
-    return render(request , 'signin.html')
-
+#def post_signup(request):
 def index(request):
     return render(request,'index.html')
