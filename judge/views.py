@@ -13,7 +13,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            return redirect('/')
+            return redirect('/signin')
     else:
         form = UserCreationForm()
     return render(request, 'signup.html')
