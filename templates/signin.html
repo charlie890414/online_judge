@@ -41,18 +41,22 @@
   <body>
 
     <div class="container">
-      <h2 class="form-signin-heading">Please sign in</h2>
-      <form class="form-signin" method="post" action="">
 
-        <label for="username">User:</label>{% csrf_token %}
-        <input type="text" name="username" value="{{ username }}" id="username"><br/>
-
-        <label for="password">Password: </label>
-        <input type="password" name="password" value="" id="password"><br/>
-
-        <input type="submit" value="Sign In"/>
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>{% csrf_token %}
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus value="{{ email }}">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="button button1" type="submit">Sign in
+        </button>
       </form>
-      {{ user.username }}
+
     </div> <!-- /container -->
 
 

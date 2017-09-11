@@ -17,12 +17,10 @@ from django.conf.urls import url
 from django.contrib import admin
 from judge.views import index
 from judge.views import signup
-from judge.views import signin, signout
-
+from judge.views import signin
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin', admin.site.urls),
     url(r'^$', index),
     url(r'^signup', signup),
     url(r'^signin', signin),
-    url(r'^signout', signout),
 ]

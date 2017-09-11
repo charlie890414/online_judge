@@ -14,20 +14,11 @@
 			<li ><a href="">Rank</a></li>
 			<li ><a href="">Status</a></li>
 			<li ><a href="">Collection</a></li>
-
-			{% if request.user.is_authenticated %}
-				<li ><a href="/signout" class="sign">Sign Out</a></li>
-			{% else %}
-
-				<li ><a href="/signin" class="sign">Sign In</a></li>
-				<li ><a href="/signup" class="signup">Sign Up</a></li>
-
-			{% endif %}
+			<li ><a href="/signin" class="sign">Sign In</a></li>
+			<li ><a href="/signup" class="signup">Sign Up</a></li>
 			<div class="clear"></div>
 		</ul>
 	</div>
-	{% if request.user.is_authenticated %}
-		<p>{{user.username}}登入</p>
-	{% endif %}
+
 </body>
 </html>
