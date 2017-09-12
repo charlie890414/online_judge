@@ -1,52 +1,42 @@
 from django.shortcuts import render
 from django.views.decorators import csrf
 from django.shortcuts import redirect
-from django.contrib import auth
-from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
-
+from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import member
+from .models import member, news
 
 def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            return redirect('/signin')
-    else:
-        form = UserCreationForm()
-    return render(request, 'signup.html')
-
+    if request.method == 'GET':
+        return render(request,'signup.html')
+    elif request.method == 'POST':
+            print(request.POST)
+            if request.POST['password'] != request.POST['repassword']:
+                return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": "password are not the same "})
+            try :
+                new_member = member.objects.create(name=request.POST['name'],email=request.POST['email'],password=make_password(request.POST['password']))
+                print(new_member)
+                return redirect('/signin')
+            except:
+                return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": "your email or name have been used"})
 def signin(request):
-    if request.user.is_authenticated():
-        return render(request, 'signin.html')
-
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '')
-
-    user = auth.authenticate(username=username, password=password)
-
-    if user is not None and user.is_active:
-        auth.login (request, user)
-        return redirect('/')
-    else:
-        return render(request, 'signin.html')
-
-def index(request):
-    return render(request,'index.html')
-
-
-def signout(request):
-    auth.logout(request)
+    if request.method == 'GET':
+        return render(request,'signin.html')
+    elif request.method == 'POST':
+        try:
+            member.authenticate(request.POST['email'],request.POST['password'])
+            member.login(request)
+            return redirect('/')
+        except:
+            return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})
+def logout(request):
+    member.logout(request)
     return redirect('/')
 
-
-"""if request.method == 'GET':
-    return render(request,'signup.html')
-elif request.method == 'POST':
-        print(request.POST)
-        if request.POST['password'] == request.POST['repassword']:
-            new_member = member.objects.create(name=request.POST['username'],email=request.POST['email'],password=request.POST['password'])
-            print(new_member)
-            return redirect('/')"""
+def index(request):
+    new = news.objects.all()
+    try:
+        if request.session['statue'] == 'login':
+            return render(request,'index.html',{'login':True,'name':member.get_name(request)})
+    except:
+        return render(request,'index.html', locals())
