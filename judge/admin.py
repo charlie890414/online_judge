@@ -2,4 +2,7 @@ from django.contrib import admin
 from .models import member
 # Register your models here.
 
-admin.site.register(member)
+class showmember(admin.ModelAdmin):
+    list_display = ('name','email', 'AC') # list
+ 
+admin.site.register(member,showmember)
