@@ -25,7 +25,13 @@ def signin(request):
             return redirect('/')
         else:
             return render(request,'signin.html') 
+def logout(request):
+    member.logout(request)
+    return redirect('/')
 
 def index(request):
-    print(request.session['statue'])
-    return render(request,'index.html')
+    try:
+        if request.session['statue'] == 'login':
+            return render(request,'index.html',{'login':True})
+    except:
+        return render(request,'index.html')

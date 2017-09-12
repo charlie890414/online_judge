@@ -7,8 +7,12 @@
 		<li ><a href="">Rank</a></li>
 		<li ><a href="">Status</a></li>
 		<li ><a href="">Collection</a></li>
+		{% if login %}
+		<li ><a href="/logout" class="signup">logout</a></li>
+		{% else %}
 		<li ><a href="/signin" class="sign">Sign In</a></li>
 		<li ><a href="/signup" class="signup">Sign Up</a></li>
+		{% endif %}
 		<div class="clear"></div>
 	</ul>
 </div>
