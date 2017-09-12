@@ -11,7 +11,7 @@ class member(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def get_name(request):
         user = member.objects.get(email=request.session['email'])
         return user.name
@@ -26,6 +26,13 @@ class member(models.Model):
         return request
 
     def logout(request):
-        del request.session['statue'] 
+        del request.session['statue']
         del request.session['email']
         return request
+
+class news(models.Model):
+    title = models.CharField(max_length=20)
+    contain = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.title
