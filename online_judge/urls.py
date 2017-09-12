@@ -21,7 +21,7 @@ from judge.views import signin
 from judge.views import logout
 
 urlpatterns = [
-    url(r'^admin', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^signup', signup),
     url(r'^signin', signin),
