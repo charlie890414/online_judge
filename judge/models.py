@@ -11,6 +11,10 @@ class member(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_name(request):
+        user = member.objects.get(email=request.session['email'])
+        return user.name
 
     def authenticate(useremail,password):
         user = member.objects.get(email=useremail)
@@ -18,8 +22,10 @@ class member(models.Model):
 
     def login(request):
         request.session['statue'] = 'login'
+        request.session['email'] = request.POST['email']
         return request
 
     def logout(request):
         del request.session['statue'] 
+        del request.session['email']
         return request

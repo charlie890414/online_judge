@@ -32,6 +32,6 @@ def logout(request):
 def index(request):
     try:
         if request.session['statue'] == 'login':
-            return render(request,'index.html',{'login':True})
+            return render(request,'index.html',{'login':True,'name':member.get_name(request)})
     except:
         return render(request,'index.html')
