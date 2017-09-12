@@ -13,9 +13,12 @@ def signup(request):
             print(request.POST)  
             if request.POST['password'] != request.POST['repassword']:    
                 return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": "password are not the same "})
-            new_member = member.objects.create(name=request.POST['name'],email=request.POST['email'],password=make_password(request.POST['password']))
-            print(new_member)          
-            return redirect('/')
+            try :
+                new_member = member.objects.create(name=request.POST['name'],email=request.POST['email'],password=make_password(request.POST['password']))
+                print(new_member)          
+                return redirect('/signin')
+            except:
+                return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": "your email or name have been used"})
 def signin(request):
     if request.method == 'GET':
         return render(request,'signin.html')
