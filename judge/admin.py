@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import member, news
+from .models import member, new
 # Register your models here.
 
 class showmember(admin.ModelAdmin):
@@ -9,4 +9,4 @@ class shownews(admin.ModelAdmin):
     list_display = ('title', 'contain') # list
 
 admin.site.register(member,showmember)
-admin.site.register(news,shownews)
+admin.site.register(new,shownews)

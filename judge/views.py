@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 # Create your views here.
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import member, news
+from .models import member, new
 
 def signup(request):
     if request.method == 'GET':
@@ -34,7 +34,7 @@ def logout(request):
     return redirect('/')
 
 def index(request):
-    new = news.objects.all()
+    news = new.objects.all()
     try:
         if request.session['statue'] == 'login':
             return render(request,'index.html',{'login':True,'name':member.get_name(request)})

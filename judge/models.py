@@ -30,7 +30,7 @@ class member(models.Model):
         del request.session['email']
         return request
 
-class news(models.Model):
+class new(models.Model):
     title = models.CharField(max_length=20)
     contain = models.CharField(max_length=500)
 
