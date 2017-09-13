@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import member, news
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 def signup(request):
     if request.method == 'GET':
@@ -40,3 +41,8 @@ def index(request):
             return render(request,'index.html',{'login':True,'name':member.get_name(request)})
     except:
         return render(request,'index.html', locals())
+
+def rank(request):
+    user = member.objects.order_by('AC').reverse
+    
+    return render(request, 'rank.html', locals())

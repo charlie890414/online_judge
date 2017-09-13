@@ -19,8 +19,16 @@
 		<div class="clear"></div>
 	</ul>
 </div>
-{% for n in new %}
-	<p><h1>{{ n.title }}</h1></p>
-	<p><h3>{{ n.contain }}</h3></p>
-	<br/>
+
+<table style="width:100%">
+<tr>
+  <th>Name</th>
+  <th>AC</th>
+</tr>
+{% for u in user %}
+<tr>
+  <td align="center">{{ u.name }}</td>
+  <td align="center">{{ u.AC }}</td>
+</tr>
 {% endfor %}
+</table>
