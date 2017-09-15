@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import member, news
-from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def signup(request):
     if request.method == 'GET':
@@ -42,7 +42,15 @@ def index(request):
     except:
         return render(request,'index.html', locals())
 
-def rank(request):
-    user = member.objects.order_by('AC').reverse
-    
-    return render(request, 'rank.html', locals())
+def ranks(request, rank):
+    user_list = member.objects.order_by('AC').reverse()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(user_list, 10)
+    try:
+        users = paginator.page(int(rank))
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, 'rank.html', {'users' :users})
