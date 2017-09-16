@@ -42,17 +42,6 @@ def index(request):
     except:
         return render(request,'index.html', locals())
 
-<<<<<<< HEAD
-def rank(request):
-    user = member.objects.order_by('AC').reverse
-    
-    return render(request, 'rank.html', locals())
-def collection(request):
-    if request.method == 'GET':
-        return render(request,'collection.html')
-    
-    return render(request, 'collection.html', locals())
-=======
 def ranks(request, rank):
     user_list = member.objects.order_by('AC').reverse()
     page = request.GET.get('page', 1)
@@ -65,4 +54,7 @@ def ranks(request, rank):
         users = paginator.page(paginator.num_pages)
 
     return render(request, 'rank.html', {'users' :users})
->>>>>>> 821120d7dd3f77d73bf6911d70d41c5e1aaf190d
+def collection(request, collection):
+    if request.method == 'GET':
+        return render(request,'collection.html')
+
