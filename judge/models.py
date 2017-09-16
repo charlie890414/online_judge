@@ -40,7 +40,7 @@ class new(models.Model):
     def __str__(self):
         return self.title
 def generate_questionfilename(self, filename):
-    url = "static/question/%s/%s" % (self.title, filename)
+    url = "static/question/%s/%s" % (self.title.replace(' ','_'), filename)
     return url
 class problem(models.Model):
     title = models.CharField(max_length=30,unique=True)

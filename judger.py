@@ -2,7 +2,7 @@ import os
 import sys
 import time
 import django
-
+import threading
 os.environ['DJANGO_SETTINGS_MODULE'] ='online_judge.settings'
 from online_judge import settings
 django.setup()
@@ -10,41 +10,50 @@ django.setup()
 from judge.models import *
 import subprocess
 import filecmp
-def rundocker(judging):    
+import difflib
+def rundocker(judging):
+    submission.objects.filter(id=judging.id).update(state='judging')
+    name = 'judger'+str(judging.id)  
     problem = os.path.join(os.getcwd(), os.path.dirname(str(judging.problem.ans).replace('/','\\')))
-    code = os.path.join(os.getcwd(), os.path.dirname(str(judging.code).replace('/','\\')))        
+    code = os.path.join(os.getcwd(), os.path.dirname(str(judging.code).replace('/','\\'))) 
     to1 = "/tmp/problem"
     to2 = "/tmp/code"
-    if judging.problem.test=="": 
-        bash = "\"python3 tmp/code/*.py &> tmp/code/out.txt\""
+    if judging.problem.test=="":
+        if judging.lang == "python3":
+            bash = "\"python3 tmp/code/*.py > tmp/code/out.txt\""
     else:
-        bash = "\"python3 tmp/code/*.py< tmp/problem/in.txt &> tmp/code/out.txt\""
-    cmd = 'docker run -dit -v %s:%s -v %s:%s --memory="32M" --memory-swap="32M" --cpu-quota=75000 --name judge aefb65fc0d2e bash -c %s' % (problem,to1,code,to2,bash)
+        if judging.lang == "python3":
+            bash = "\"python3 tmp/code/*.py < tmp/problem/in.txt > tmp/code/out.txt\""
+    cmd = 'docker run -dit -v %s:%s -v %s:%s --memory="32M" --memory-swap="32M" --cpu-quota=75000 --name %s aefb65fc0d2e bash -c %s' % (problem,to1,code,to2,name,bash)
     tmp = subprocess.Popen(cmd)
-    # cmd = 'docker start judge'
-    # tmp = subprocess.call(cmd)
-    # cmd = 'docker exec -it judge bash'
-    # tmp = subprocess.Popen(cmd)
-    time.sleep(10)
-    if tmp.poll():
-        tmp.terminate()
-        submission.objects.filter(id=judging.id).update(state='TLE')
-    cmd = 'docker stop judge'
+    for i in range(11):        
+        time.sleep(1)
+        if tmp.poll()!=None:
+            break
+        elif  i == 10:
+            tmp.terminate()
+            submission.objects.filter(id=judging.id).update(state='TLE')
+    cmd = 'docker rm %s' %(name)
     tmp = subprocess.call(cmd)
-    cmd = 'docker rm judge'
-    tmp = subprocess.call(cmd)
-    ans =problem+"\\ans.txt"
-    out =code+"\\out.txt"
+    ans =open(problem+"\\ans.txt").read()
+    out =open(code+"\\out.txt").read()
+    print(ans)
+    print(out)
     try:
-        if filecmp.cmp(ans,out):
+        if ans == out:
             submission.objects.filter(id=judging.id).update(state='AC')
-        else:
+        else: 
             submission.objects.filter(id=judging.id).update(state='WA or Error')
     except:
         submission.objects.filter(id=judging.id).update(state='Error')
     finally:
         return
-judging=list(submission.objects.filter(state='waiting'))
-if judging:
-    for mission in judging:
-        rundocker(mission)
+if __name__ == '__main__':
+    while True:
+        judging=submission.objects.filter(state='waiting')
+        if judging:
+            for mission in judging:
+                while threading.active_count() > 10:
+                    time.sleep(0.5)
+                the_thread =  threading.Thread(target=rundocker(mission))
+                the_thread.start()            
