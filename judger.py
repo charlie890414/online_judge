@@ -16,9 +16,9 @@ def rundocker(judging):
     to1 = "/tmp/problem"
     to2 = "/tmp/code"
     if judging.problem.test=="": 
-        bash = "python3 tmp/code/*.py &> tmp/code/out.txt"
+        bash = "\"python3 tmp/code/*.py &> tmp/code/out.txt\""
     else:
-        bash = "python3 tmp/code/*.py< tmp/problem/in.txt &> tmp/code/out.txt"
+        bash = "\"python3 tmp/code/*.py< tmp/problem/in.txt &> tmp/code/out.txt\""
     cmd = 'docker run -dit -v %s:%s -v %s:%s --memory="32M" --memory-swap="32M" --cpu-quota=75000 --name judge aefb65fc0d2e bash -c %s' % (problem,to1,code,to2,bash)
     tmp = subprocess.Popen(cmd)
     # cmd = 'docker start judge'
@@ -39,9 +39,11 @@ def rundocker(judging):
         if filecmp.cmp(ans,out):
             submission.objects.filter(id=judging.id).update(state='AC')
         else:
-            submission.objects.filter(id=judging.id).update(state='WA or error')
+            submission.objects.filter(id=judging.id).update(state='WA or Error')
     except:
-        submission.objects.filter(id=judging.id).update(state='error')
+        submission.objects.filter(id=judging.id).update(state='Error')
+    finally:
+        return
 judging=list(submission.objects.filter(state='waiting'))
 if judging:
     for mission in judging:
