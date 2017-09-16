@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^signin', signin),
     url(r'^logout', logout),
     url(r'^rank=(\d+)', ranks),
-    url(r'^profile=(\d+)', profiles),
+    url(r'^profile=(\w+)', profiles),
 ]+ static(STATIC_URL, document_root=STATIC_URL)

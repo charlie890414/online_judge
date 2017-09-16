@@ -53,10 +53,23 @@ def ranks(request, rank):
             users = paginator.page(1)
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
-        return render(request, 'rank.html', {'users' :users})
+
+        try:
+            if request.session['statue'] == 'login':
+                return render(request, 'rank.html', {'users' :users, 'login':True,'name':member.get_name(request)})
+
+        except:
+            return render(request,'rank.html', locals())
     else:
-        return render(request, 'rank.html', {'error' :'Has No User'})
+        try:
+            if request.session['statue'] == 'login':
+                return render(request, 'rank.html', {'users' :users, 'login':True,'name':member.get_name(request), 'error' :'Has No User'})
+
+        except:
+            return render(request,'rank.html', {'login':True,'name':member.get_name(request), 'error' :'Has No User'})
 
 
 def profiles(request, profile):
-    pass
+    users = member.objects.get(name=str(profile))
+
+    return render(request, 'profile.html', {'user':users})
