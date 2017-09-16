@@ -15,7 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+<<<<<<< HEAD
 from judge.views import index, signup, signin, logout, rank, collection
+=======
+from judge.views import index, signup, signin, logout, ranks
+
+from django.conf.urls.static import static
+from .settings import STATIC_URL
+>>>>>>> 821120d7dd3f77d73bf6911d70d41c5e1aaf190d
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,7 +30,12 @@ urlpatterns = [
     url(r'^signup', signup),
     url(r'^signin', signin),
     url(r'^logout', logout),
+<<<<<<< HEAD
     url(r'^rank', rank),
     url(r'^rank=(\d+)', rank),
     url(r'^collection', collection)
 ]
+=======
+    url(r'^rank=(\d+)', ranks),
+]+ static(STATIC_URL, document_root=STATIC_URL)
+>>>>>>> 821120d7dd3f77d73bf6911d70d41c5e1aaf190d

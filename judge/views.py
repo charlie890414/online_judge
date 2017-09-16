@@ -4,8 +4,8 @@ from django.shortcuts import redirect
 # Create your views here.
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import member, news
-from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+from .models import member, new
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def signup(request):
     if request.method == 'GET':
@@ -35,13 +35,14 @@ def logout(request):
     return redirect('/')
 
 def index(request):
-    new = news.objects.all()
+    news = new.objects.all()
     try:
         if request.session['statue'] == 'login':
             return render(request,'index.html',{'login':True,'name':member.get_name(request)})
     except:
         return render(request,'index.html', locals())
 
+<<<<<<< HEAD
 def rank(request):
     user = member.objects.order_by('AC').reverse
     
@@ -51,3 +52,17 @@ def collection(request):
         return render(request,'collection.html')
     
     return render(request, 'collection.html', locals())
+=======
+def ranks(request, rank):
+    user_list = member.objects.order_by('AC').reverse()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(user_list, 10)
+    try:
+        users = paginator.page(int(rank))
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, 'rank.html', {'users' :users})
+>>>>>>> 821120d7dd3f77d73bf6911d70d41c5e1aaf190d
