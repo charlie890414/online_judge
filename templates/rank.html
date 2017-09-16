@@ -20,7 +20,7 @@
 	</ul>
 </div>
 
-<table style="width:100%">
+<table>
 <tr>
   <th>Name</th>
   <th>AC</th>
@@ -33,7 +33,7 @@
 {% endfor %}
 </table>
 
-<div align="center" >
+<div>
 {% if users.has_other_pages %}
 	{% if users.has_previous %}
 		<a href="rank={{ users.previous_page_number }}">&laquo;</a>
