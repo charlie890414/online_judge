@@ -9,6 +9,8 @@ __pycache__/
 # Distribution / packaging
 .Python
 .vscode/
+static/question/
+static/submission/
 env/
 build/
 develop-eggs/

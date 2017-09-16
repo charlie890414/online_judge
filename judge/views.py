@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 # Create your views here.
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import member, news
+from .models import member, new
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def signup(request):
