@@ -54,3 +54,6 @@ def ranks(request, rank):
         users = paginator.page(paginator.num_pages)
 
     return render(request, 'rank.html', {'users' :users})
+
+def profiles(request, profile):
+    pass

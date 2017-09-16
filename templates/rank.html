@@ -27,13 +27,13 @@
 </tr>
 {% for u in users %}
 <tr>
-  <td align="center">{{ u.name }}</td>
+  <td align="center"><a href="/profile={{ u.name }}">{{ u.name }}</a> </td>
   <td align="center">{{ u.AC }}</td>
 </tr>
 {% endfor %}
 </table>
 
-<div align="center" >
+<div align="center">
 {% if users.has_other_pages %}
 	{% if users.has_previous %}
 		<a href="rank={{ users.previous_page_number }}">&laquo;</a>
