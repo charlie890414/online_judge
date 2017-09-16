@@ -9,7 +9,7 @@ class shownew(admin.ModelAdmin):
     list_display = ('title', 'contain') # list
 
 class showsubmission(admin.ModelAdmin):
-    list_display = ('id','problem','member','state','lang','code') # list
+    list_display = ('id','problem','member','status','lang','code') # list
 
 class showproblem(admin.ModelAdmin):
     list_display = ('title','author','test','ans') # list

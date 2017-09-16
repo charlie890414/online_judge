@@ -12,7 +12,7 @@ import subprocess
 import filecmp
 import difflib
 def rundocker(judging):
-    submission.objects.filter(id=judging.id).update(state='judging')
+    submission.objects.filter(id=judging.id).update(status='judging')
     name = 'judger'+str(judging.id)  
     problem = os.path.join(os.getcwd(), os.path.dirname(str(judging.problem.ans).replace('/','\\')))
     code = os.path.join(os.getcwd(), os.path.dirname(str(judging.code).replace('/','\\'))) 
@@ -24,9 +24,9 @@ def rundocker(judging):
     else:
         if judging.lang == "python3":
             bash = "\"python3 tmp/code/*.py < tmp/problem/in.txt > tmp/code/out.txt\""
-    cmd = 'docker run -dit -v %s:%s -v %s:%s --memory="32M" --memory-swap="32M" --cpu-quota=75000 --name %s aefb65fc0d2e bash -c %s' % (problem,to1,code,to2,name,bash)
+    cmd = 'docker run -dit -v %s:%s -v %s:%s --memory="65536" --memory-swap="65536" --cpu-quota=75000 --name %s aefb65fc0d2e bash -c %s' % (problem,to1,code,to2,name,bash)
     tmp = subprocess.Popen(cmd)
-    for i in range(11):        
+    for i in range(2):        
         time.sleep(1)
         if tmp.poll()!=None:
             break
@@ -41,19 +41,19 @@ def rundocker(judging):
     print(out)
     try:
         if ans == out:
-            submission.objects.filter(id=judging.id).update(state='AC')
+            submission.objects.filter(id=judging.id).update(status='AC')
         else: 
-            submission.objects.filter(id=judging.id).update(state='WA or Error')
+            submission.objects.filter(id=judging.id).update(status='WA or Error')
     except:
-        submission.objects.filter(id=judging.id).update(state='Error')
+        submission.objects.filter(id=judging.id).update(status='Error')
     finally:
         return
 if __name__ == '__main__':
     while True:
-        judging=submission.objects.filter(state='waiting')
+        judging=submission.objects.filter(status='waiting')
         if judging:
             for mission in judging:
                 while threading.active_count() > 10:
-                    time.sleep(0.5)
+                    time.sleep(1)
                 the_thread =  threading.Thread(target=rundocker(mission))
                 the_thread.start()            
