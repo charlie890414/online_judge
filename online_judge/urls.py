@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from judge.views import index
-from judge.views import signup
-from judge.views import signin
-from judge.views import logout
+from judge.views import index, signup, signin, logout, ranks
+
+from django.conf.urls.static import static
+from .settings import STATIC_URL
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^signup', signup),
     url(r'^signin', signin),
     url(r'^logout', logout),
-]
+    url(r'^rank=(\d+)', ranks),
+]+ static(STATIC_URL, document_root=STATIC_URL)

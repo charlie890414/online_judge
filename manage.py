@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os
 import sys
-
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "online_judge.settings")
     try:
@@ -20,3 +19,4 @@ if __name__ == "__main__":
             )
         raise
     execute_from_command_line(sys.argv)
+    

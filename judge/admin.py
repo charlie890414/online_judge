@@ -1,12 +1,20 @@
 from django.contrib import admin
-from .models import member, new
+from .models import *
 # Register your models here.
 
 class showmember(admin.ModelAdmin):
     list_display = ('name','email', 'AC') # list
 
-class shownews(admin.ModelAdmin):
+class shownew(admin.ModelAdmin):
     list_display = ('title', 'contain') # list
 
+class showsubmission(admin.ModelAdmin):
+    list_display = ('id','problem','member','state','lang','code') # list
+
+class showproblem(admin.ModelAdmin):
+    list_display = ('title','author','test','ans') # list
+
 admin.site.register(member,showmember)
-admin.site.register(new,shownews)
+admin.site.register(new,shownew)
+admin.site.register(submission,showsubmission)
+admin.site.register(problem,showproblem)
