@@ -54,7 +54,7 @@ def ranks(request, rank):
         users = paginator.page(paginator.num_pages)
 
     return render(request, 'rank.html', {'users' :users})
-def collection(request, collection):
+def collection(request):
     if request.method == 'GET':
         return render(request,'collection.html')
 
