@@ -4,12 +4,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="{% static "collection2.css" %}"> 
-	<!--<link rel="stylesheet" href="{% static "grid.css" %}">-->
-	<link rel="stylesheet" href="{% static "collection.css" %}">
-	<link href="{% static "https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" %}" integrity="sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg==" crossorigin="anonymous">
-	<link href="{% static "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" %}" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static "w3.css" %}">
 
+<head>
+	<style>
+	table, td, th {    
+		border: 1px solid #ddd;
+		text-align: left;
+	}
+		
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+		
+	th, td {
+		padding: 15px;
+	}
+	</style>
+</head>
 <div class="bar">
 	<ul>
 		<li><a href="/">SSInRc</a></li>
@@ -24,50 +39,81 @@
 		<li ><a href="/signin" class="sign">Sign In</a></li>
 		<li ><a href="/signup" class="signup">Sign Up</a></li>
 		{% endif %}
-
-
 		<div class="clear"></div>
 	</ul>
 </div>
-<div id="group-board" class="grid">
-	<div class="form-group">
-    <label class="col-md-4 control-label" for="Upload files">Upload files</label>
-    <div class="col-md-4">
-      <input id="Upload files" name="Upload photo" class="input-file" type="file">
-    </div>
-	</div>
 
-	<ul class="row">
-		<li>
-			<a herf="" class="">AC</a>
-		</li>
-
-		<li>
-			<a herf="" class="">C/C++</a>
-		</li>
-		<li>
-			<a herf="" class="">Python</a>
-		</li>
-		<li>
-			<a herf="" class="">Java</a>
-		</li>
-	</ul>
-	<div class="container">
-		<div id="group" class="col-2">
-			<table class="raw">
-				<thead>
-					<tr class="raw">
-						<th class="col-md-3">No.</th>
-						<th class="col-md-6">Name</th>
-						<th class="col-md-3">Deadline</th>
-					</tr>
-				</thead>
-				
-			</table>
-		</div>
-	</div>
-	</div>
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:200px">
+	<h3 class="w3-bar-item">Menu</h3>
+	<a href="#" class="w3-bar-item w3-button">AC</a>
+	<a href="#" class="w3-bar-item w3-button">C/C++</a>
+	<a href="#" class="w3-bar-item w3-button">Python</a>
+	<a href="#" class="w3-bar-item w3-button">Java</a>
 </div>
+<div style="margin-left:200px">
+	
+<div class="w3-container w3-teal">
+	<h1>Collections</h1>
+</div>
+
+<table>
+	<tr>
+	  <th>No.</th>
+	  <th>Name</th>
+	  <th>Deadline</th>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+	<tr>
+	  <td></td>
+	  <td></td>
+	  <td></td>
+	</tr>
+  </table>
+
 
 
 {% for n in new %}

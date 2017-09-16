@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from judge.views import index, signup, signin, logout, ranks, profiles
+from judge.views import index, signup, signin, logout, ranks, profiles ,collection
 
 from django.conf.urls.static import static
 from .settings import STATIC_URL
@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^logout', logout),
     url(r'^rank=(\d+)', ranks),
     url(r'^profile=(\w+)', profiles),
+    url(r'^collection', collection),
 ]+ static(STATIC_URL, document_root=STATIC_URL)

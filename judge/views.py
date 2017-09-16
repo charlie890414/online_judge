@@ -73,3 +73,6 @@ def profiles(request, profile):
     users = member.objects.get(name=str(profile))
 
     return render(request, 'profile.html', {'user':users})
+def collection(request):
+    if request.method == 'GET':
+        return render(request,'collection.html')
