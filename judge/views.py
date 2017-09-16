@@ -46,14 +46,17 @@ def ranks(request, rank):
     user_list = member.objects.order_by('AC').reverse()
     page = request.GET.get('page', 1)
     paginator = Paginator(user_list, 10)
-    try:
-        users = paginator.page(int(rank))
-    except PageNotAnInteger:
-        users = paginator.page(1)
-    except EmptyPage:
-        users = paginator.page(paginator.num_pages)
+    if(user_list is not None):
+        try:
+            users = paginator.page(int(rank))
+        except PageNotAnInteger:
+            users = paginator.page(1)
+        except EmptyPage:
+            users = paginator.page(paginator.num_pages)
+        return render(request, 'rank.html', {'users' :users})
+    else:
+        return render(request, 'rank.html', {'error' :'Has No User'})
 
-    return render(request, 'rank.html', {'users' :users})
 
 def profiles(request, profile):
     pass
