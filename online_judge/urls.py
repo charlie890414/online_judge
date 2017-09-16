@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from judge.views import index, signup, signin, logout, rank
+from judge.views import index, signup, signin, logout, rank, collection
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^logout', logout),
     url(r'^rank', rank),
     url(r'^rank=(\d+)', rank),
+    url(r'^collection', collection)
 ]

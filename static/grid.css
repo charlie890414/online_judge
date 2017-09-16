@@ -1,0 +1,22 @@
+body {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+h3 {
+  margin-top: 2rem;
+}
+
+.row {
+  margin-bottom: 10rem;
+}
+.row .row {
+  margin-top: 5rem;
+  margin-bottom: 0;
+}
+[class*="col-"] {
+  padding-top: auto;
+  padding-bottom: 100px;
+  background-color: rgba(175, 175, 175, 0.25);
+  border: 10px solid rgba(196, 195, 199, 0.49);
+}

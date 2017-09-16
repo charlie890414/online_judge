@@ -46,3 +46,8 @@ def rank(request):
     user = member.objects.order_by('AC').reverse
     
     return render(request, 'rank.html', locals())
+def collection(request):
+    if request.method == 'GET':
+        return render(request,'collection.html')
+    
+    return render(request, 'collection.html', locals())
