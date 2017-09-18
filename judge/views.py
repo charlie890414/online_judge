@@ -72,7 +72,7 @@ def ranks(request, rank):
 def profiles(request, profile):
     users = member.objects.get(name=str(profile))
 
-    return render(request, 'profile.html', {'user':users})
+    return render(request, 'profiles.html', {'user':users})
 def collection(request):
     if request.method == 'GET':
         return render(request,'collection.html')
