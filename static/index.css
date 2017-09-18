@@ -27,7 +27,7 @@ div > ul {
 	list-style-type: none;
 }
 
-	div > ul > li {
+	li {
 		display: inline-block;
 		float: left;
 		height: 100%;
@@ -42,7 +42,6 @@ div > ul {
 
 	.bar a {
 		padding-top: 15px;
-		height: 100%;
 		display: block;
 		padding: 10px;
 		font-size: 90%;
