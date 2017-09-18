@@ -86,7 +86,7 @@ div > ul {
 	th ,td {
 		text-align: center;
 		color: #999;
-		line-height: 30px;
+		line-height: 50px;
 		width: 50%;
 	}
 
@@ -98,4 +98,11 @@ div > ul {
 
 	tr:nth-child(odd) {
 		background: #ccc;
+	}
+
+	.footer {
+		width: 100%;
+		margin: auto;
+		position: absolute;
+    	bottom: 0;
 	}
