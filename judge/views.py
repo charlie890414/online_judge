@@ -70,9 +70,38 @@ def ranks(request, rank):
 
 
 def profiles(request, profile):
-    users = member.objects.get(name=str(profile))
+    user = member.objects.get(name=str(profile))
 
-    return render(request, 'profiles.html', {'user':users})
+    try:
+        if request.session['statue'] == 'login':
+            return render(request,'profiles.html',{'login':True,'name':member.get_name(request), 'user':user})
+    except:
+        return render(request, 'profiles.html', locals())
+    
 def collection(request):
     if request.method == 'GET':
-        return render(request,'collection.html')
+        try:
+            if request.session['statue'] == 'login':
+                return render(request,'collection.html',{'login':True,'name':member.get_name(request)})
+        except:
+            return render(request,'collection.html', locals())
+
+def mypro(request, myprofile):
+    user = member.objects.get(name=str(myprofile))
+    try:
+        if request.session['statue'] == 'login':
+            return render(request,'submit.html',{'login':True,'name':member.get_name(request), 'user':user})
+    except:
+        return render(request, 'submit.html', locals())
+
+def submits(request, submit):
+    user = member.objects.get(name=str(submit))
+    if request.method == 'GET':
+        return render(request,'submit.html', {'login':True,'name':member.get_name(request), 'user':user})
+    elif request.method == 'POST':
+        try:
+            user.overview = 'test'
+            user.save()
+            return redirect('/myprofile='+ user.name)
+        except:
+            return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})

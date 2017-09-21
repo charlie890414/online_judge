@@ -107,32 +107,12 @@
 
 <body>
 
-  {% load staticfiles %}
-  <link rel="stylesheet" href="{% static "index.css" %}">
-  <div class="bar">
-  	<ul>
-  		<li><a href="/">SSInRc</a></li>
-  		<li ><a href="">Info</a></li>
-  		<li ><a href="/rank=1">Rank</a></li>
-  		<li ><a href="">Status</a></li>
-  		<li ><a href="">Collection</a></li>
-  		{% if login %}
-  		<li ><a href="/user" class="sign">{{ name }}</a></li>
-  		<li ><a href="/logout" class="signup">Logout</a></li>
-  		{% else %}
-  		<li ><a href="/signin" class="sign">Sign In</a></li>
-  		<li ><a href="/signup" class="signup">Sign Up</a></li>
-  		{% endif %}
-
-
-  		<div class="clear"></div>
-  	</ul>
-  </div>
+  {% include "bar.html" %}
 
    <div class="container">
 <div class="row">
 <div class="col-md-10 ">
-<form class="form-horizontal">
+<form class="form-horizontal" action="/submit={{ user.name }}" method="post">
 <fieldset>
 
 <!-- Form Name -->
@@ -157,23 +137,6 @@
   </div>
 
 
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="Date Of Birth">Date Of Birth</label>
-  <div class="col-md-4">
-
-  <div class="input-group">
-       <div class="input-group-addon">
-     <i class="fa fa-birthday-cake"></i>
-
-       </div>
-       <input id="Date Of Birth" name="Date Of Birth" type="text" placeholder="Date Of Birth" class="form-control input-md">
-      </div>
-
-
-  </div>
 </div>
 
 <!-- Multiple Radios (inline) -->
@@ -319,7 +282,9 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="Overview (max 200 words)">Overview (max 200 words)</label>
   <div class="col-md-4">
-    <textarea class="form-control" rows="10"  id="Overview (max 200 words)" name="Overview (max 200 words)">Overview</textarea>
+    <textarea class="form-control" rows="10"  id="overview" name="overview">
+      {{ user.overview }}
+    </textarea>
   </div>
 </div>
 
@@ -327,7 +292,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" ></label>
   <div class="col-md-4">
-  <a href="#" class="button" style="vertical-align:middle"><span class="button">Submit</span></a>
+  <a href="/submit={{ user.name }}" class="button" style="vertical-align:middle"><span class="button">Submit</span></a>
   <a href="#" class="button2" value=""><span class="button2">clear</span></a>
 
   </div>

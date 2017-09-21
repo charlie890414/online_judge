@@ -25,23 +25,7 @@
 	}
 	</style>
 </head>
-<div class="bar">
-	<ul>
-		<li><a href="/">SSInRc</a></li>
-		<li ><a href="">Info</a></li>
-		<li ><a href="/rank=1">Rank</a></li>
-		<li ><a href="">Status</a></li>
-		<li ><a href="/collection">Collection</a></li>
-		{% if login %}
-		<li ><a href="/user" class="sign">{{ name }}</a></li>
-		<li ><a href="/logout" class="signup">Logout</a></li>
-		{% else %}
-		<li ><a href="/signin" class="sign">Sign In</a></li>
-		<li ><a href="/signup" class="signup">Sign Up</a></li>
-		{% endif %}
-		<div class="clear"></div>
-	</ul>
-</div>
+{% include "bar.html" %}
 
 <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:200px">
 	<h3 class="w3-bar-item">Menu</h3>
