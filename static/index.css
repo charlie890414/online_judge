@@ -99,3 +99,10 @@ div > ul {
 	tr:nth-child(odd) {
 		background: #ccc;
 	}
+
+	.footer {
+		width: 100%;
+		margin: auto;
+		position: absolute;
+    	bottom: 0;
+	}
