@@ -177,24 +177,6 @@
   </div>
 </div>
 
-<!-- Text input-->
-<!-- <div class="form-group">
-  <label class="col-md-4 control-label" for="Temporary Address">Temporary Address</label>
-  <div class="col-md-4">
-
-  <div class="input-group">
-       <div class="input-group-addon">
-     <i class="fa fa-home" style="font-size:20px;"></i>
-
-       </div>
- <input id="Temporary Address" name="Temporary Address" type="text" placeholder="Temporary Address" class="form-control input-md">
-      </div>
-
-
-  </div>
-</div>
- -->
-
 
 <!-- Text input-->
 <div class="form-group">
@@ -205,25 +187,10 @@
      <i class="fa fa-phone"></i>
 
        </div>
-    <p class="form-control input-md">
-      {% if user.pphone is not 0 %}
-        {{ user.pphone }}
-      {% endif %}
-    </p>
+    <p class="form-control input-md">{{ user.pphone }}</p>
 
       </div>
-      <div class="input-group othertop">
-       <div class="input-group-addon">
-     <i class="fa fa-mobile fa-1x" style="font-size: 20px;"></i>
-
-       </div>
-    <p class="form-control input-md">
-      {% if user.sphone is not 0 %}
-        {{ user.sphone }}
-      {% endif %}
-    </p>
-
-      </div>
+      
 
   </div>
 </div>

@@ -86,22 +86,28 @@ def collection(request):
         except:
             return render(request,'collection.html', locals())
 
-def mypro(request, myprofile):
-    user = member.objects.get(name=str(myprofile))
+def mypro(request):
+    user = member.objects.get(email=str(request.session['email']))
     try:
         if request.session['statue'] == 'login':
-            return render(request,'submit.html',{'login':True,'name':member.get_name(request), 'user':user})
+            return render(request,'submit.html',{'login':True,'name':member.get_name(request),'user':user})
     except:
-        return render(request, 'submit.html', locals())
+        return render(request, 'index.html', locals())
 
-def submits(request, submit):
-    user = member.objects.get(name=str(submit))
-    if request.method == 'GET':
-        return render(request,'submit.html', {'login':True,'name':member.get_name(request), 'user':user})
-    elif request.method == 'POST':
+def submits(request):
+    user = member.objects.filter(email=request.session['email'])
+    users = member.objects.get(email=request.session['email'])
+    if request.method == 'POST':
         try:
-            user.overview = 'test'
-            user.save()
-            return redirect('/myprofile='+ user.name)
+            print(request.POST)
+            user.update(overview=str(request.POST['overview']))
+            user.update(pphone=str(request.POST['pphone']))
+            return redirect('/myprofile') 
+            
+        except:
+            return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})
+    elif request.method == 'GET':
+        try:
+            return redirect('/myprofile')
         except:
             return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})

@@ -96,13 +96,7 @@
      }
     </style>
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    
 </head>
 
 <body>
@@ -112,7 +106,7 @@
    <div class="container">
 <div class="row">
 <div class="col-md-10 ">
-<form class="form-horizontal" action="/submit={{ user.name }}" method="post">
+<form class="form-horizontal" action="/submit" method="post">
 <fieldset>
 
 <!-- Form Name -->
@@ -130,7 +124,7 @@
         <i class="fa fa-user">
         </i>
        </div>
-       <input id="Name (Full name)" name="Name (Full name)" type="text" placeholder="Name (Full name)" class="form-control input-md">
+       <text id="Name (Full name)" name="Name (Full name)" type="text" placeholder="Name (Full name)" class="form-control input-md">{{ user.name }}</text>
       </div>
 
 
@@ -177,24 +171,6 @@
   </div>
 </div>
 
-<!-- Text input-->
-<!-- <div class="form-group">
-  <label class="col-md-4 control-label" for="Temporary Address">Temporary Address</label>
-  <div class="col-md-4">
-
-  <div class="input-group">
-       <div class="input-group-addon">
-     <i class="fa fa-home" style="font-size:20px;"></i>
-
-       </div>
- <input id="Temporary Address" name="Temporary Address" type="text" placeholder="Temporary Address" class="form-control input-md">
-      </div>
-
-
-  </div>
-</div>
- -->
-
 
 <!-- Text input-->
 <div class="form-group">
@@ -205,17 +181,10 @@
      <i class="fa fa-phone"></i>
 
        </div>
-    <input id="Phone number " name="Phone number " type="text" placeholder="Primary Phone number " class="form-control input-md">
+    <input id="Phone number " name="pphone" type="number" maxlength="10" placeholder="{{ user.pphone }}" class="form-control input-md">
 
       </div>
-      <div class="input-group othertop">
-       <div class="input-group-addon">
-     <i class="fa fa-mobile fa-1x" style="font-size: 20px;"></i>
-
-       </div>
-    <input id="Phone number " name="Secondary Phone number " type="text" placeholder=" Secondary Phone number " class="form-control input-md">
-
-      </div>
+      
 
   </div>
 </div>
@@ -229,8 +198,7 @@
      <i class="fa fa-envelope-o"></i>
 
        </div>
-    <input id="Email Address" name="Email Address" type="text" placeholder="Email Address" class="form-control input-md">
-
+    <text id="Email Address" name="Email Address" type="text" placeholder="Email Address" class="form-control input-md">{{ user.email }}</text>
       </div>
 
   </div>
@@ -282,24 +250,22 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="Overview (max 200 words)">Overview (max 200 words)</label>
   <div class="col-md-4">
-    <textarea class="form-control" rows="10"  id="overview" name="overview">
-      {{ user.overview }}
-    </textarea>
+    <textarea class="form-control" rows="10"  id="overview" name="overview">{{ user.overview }}</textarea>
   </div>
 </div>
-
+{% csrf_token %}
 
 <div class="form-group">
   <label class="col-md-4 control-label" ></label>
   <div class="col-md-4">
-  <a href="/submit={{ user.name }}" class="button" style="vertical-align:middle"><span class="button">Submit</span></a>
+  <button class="button" style="vertical-align:middle" type="submit"><span class="button">Submit</span></button>
   <a href="#" class="button2" value=""><span class="button2">clear</span></a>
-
   </div>
 </div>
 
 </fieldset>
 </form>
+
 </div>
 <div class="col-md-2 hidden-xs">
 <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
