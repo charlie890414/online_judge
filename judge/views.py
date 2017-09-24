@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 # Create your views here.
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import member, new
+from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def signup(request):
@@ -80,9 +80,12 @@ def profiles(request, profile):
     
 def collection(request):
     if request.method == 'GET':
+        
+        problems = problem.objects.all()
+        print(problems)
         try:
             if request.session['statue'] == 'login':
-                return render(request,'collection.html',{'login':True,'name':member.get_name(request)})
+                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':problems})
         except:
             return render(request,'collection.html', locals())
 
