@@ -43,7 +43,7 @@ class new(models.Model):
     def __str__(self):
         return self.title
 def generate_questionfilename(self, filename):
-    url = "static/question/%s/%s" % (self.title.replace(' ','_'), filename)
+    url = "static/question/%s/" % (self.title.replace(' ','_'))
     return url
 class problem(models.Model):
     title = models.CharField(max_length=30,unique=True)
@@ -55,7 +55,7 @@ class problem(models.Model):
         return self.title
 
 def generate_submissionfilename(self, filename):
-    url = "static/submission/%s/%s/%s/%s" % (self.member.name,self.problem.id,datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"),filename)
+    url = "static/submission/%s/%s/%s/" % (self.member.name,self.problem.id,datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))
     return url
 class submission(models.Model):
     member = models.ForeignKey('member',to_field = 'name')    

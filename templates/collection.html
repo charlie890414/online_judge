@@ -46,59 +46,13 @@
 	  <th>Name</th>
 	  <th>Deadline</th>
 	</tr>
+	{% for n in problems %}
 	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
+		<td>{{ n.id }}</td>
+		<td>{{ n.title }}</td>
 	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-	<tr>
-	  <td></td>
-	  <td></td>
-	  <td></td>
-	</tr>
-  </table>
-
-
+	{% endfor %}
+</table>
 
 {% for n in new %}
 	<p><h1>{{ n.title }}</h1></p>
