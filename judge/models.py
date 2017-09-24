@@ -42,15 +42,18 @@ class new(models.Model):
 
     def __str__(self):
         return self.title
-def generate_questionfilename(self, filename):
-    url = "static/question/%s/" % (self.title.replace(' ','_'))
+def generate_questionfiletest(self, filename):
+    url = "static/question/%s/test.txt" % (self.title.replace(' ','_'))
+    return url
+def generate_questionfileans(self, filename):
+    url = "static/question/%s/ans.txt" % (self.title.replace(' ','_'))
     return url
 class problem(models.Model):
     title = models.CharField(max_length=30,unique=True)
     author = models.ForeignKey('member',to_field = 'name')
     context = models.TextField()
-    test = models.FileField(upload_to=generate_questionfilename,blank=True,null=True)
-    ans = models.FileField(upload_to=generate_questionfilename)
+    test = models.FileField(upload_to=generate_questionfiletest,blank=True,null=True)
+    ans = models.FileField(upload_to=generate_questionfileans)
     def __str__(self):
         return self.title
 
