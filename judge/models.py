@@ -9,7 +9,7 @@ class member(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     AC = models.IntegerField(default=0)
-    overview = models.CharField(max_length=500, default="No any introduce!")
+    overview = models.CharField(max_length=500, default="No any introduce!", blank=True)
     pphone = models.CharField(blank=True,default=' ',max_length=10)
     LANGUAGE_CHOICES = (
         ('C/C++', 'C/C++'),
@@ -68,7 +68,7 @@ def generate_submissionfilename(self, filename):
     url = "static/submission/%s/%s/%s/" % (self.member.name,self.problem.id,datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))
     return url
 class submission(models.Model):
-    member = models.ForeignKey('member',to_field = 'name')    
+    member = models.ForeignKey('member',to_field = 'name')
     problem = models.ForeignKey('problem',to_field = 'title')
     status = models.CharField(max_length=20,default='waiting')
     lang = models.CharField(max_length=15,default='')
