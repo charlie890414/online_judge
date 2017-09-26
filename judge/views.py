@@ -108,6 +108,8 @@ def submits(request):
                 user.update(pphone=str(request.POST['pphone']))
             else:
                 user.update(pphone=' ')
+            languages = request.POST.getlist('language')
+            print(languages)
             return redirect('/myprofile') 
             
         except:
@@ -117,3 +119,4 @@ def submits(request):
             return redirect('/myprofile')
         except:
             return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})
+

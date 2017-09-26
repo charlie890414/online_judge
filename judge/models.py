@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.contrib.auth.hashers import make_password, check_password
+from multiselectfield import MultiSelectField
 # Create your models here.
 
 class member(models.Model):
@@ -10,6 +11,13 @@ class member(models.Model):
     AC = models.IntegerField(default=0)
     overview = models.CharField(max_length=500, default="No any introduce!")
     pphone = models.CharField(blank=True,default=' ',max_length=10)
+    LANGUAGE_CHOICES = (
+        ('C/C++', 'C/C++'),
+        ('Python', 'Python'),
+        ('Java', 'Java'),
+        ('Web(HTML,CSS,JavaScript)', 'Web(HTML,CSS,JavaScript)')
+    )
+    choice = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True)
 
     def __str__(self):
         return self.name
