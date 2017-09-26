@@ -1,0 +1,14 @@
+.row{
+    width:100%;
+    display: -webkit-flex;
+    display:         flex;
+    -webkit-align-items: center;
+            align-items: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+}
+.out{
+        border: 1.5px solid #BDBCBC;
+        border-radius: 0.5em;
+        padding:3% 2%;
+}

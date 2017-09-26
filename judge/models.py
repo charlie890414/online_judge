@@ -9,8 +9,7 @@ class member(models.Model):
     password = models.CharField(max_length=100)
     AC = models.IntegerField(default=0)
     overview = models.CharField(max_length=500, default="No any introduce!")
-    pphone = models.IntegerField(default=0)
-    sphone = models.IntegerField(default=0)
+    pphone = models.CharField(blank=True,default=' ',max_length=10)
 
     def __str__(self):
         return self.name

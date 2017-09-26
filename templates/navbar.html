@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static "navbar.css" %}">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">SSInRC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="">Info</a>
+        <a class="nav-item nav-link" href="/rank=1">Rank</a>
+        <a class="nav-item nav-link" href="">Status</a>
+        <a class="nav-item nav-link" href="/collection">Collection</a>
+      </div>
+      <div class="navbar-nav">
+        {% if login %}
+        <a class="nav-item nav-link" href="/myprofile={{ name }}">{{ name }}</a>
+        <a class="nav-item nav-link" href="/logout">Logout</a>
+        {% else %}
+        <a class="nav-item nav-link" href="/signin">Sign In</a>
+        <a class="nav-item nav-link" href="/signup">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+</nav>

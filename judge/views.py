@@ -104,7 +104,10 @@ def submits(request):
         try:
             print(request.POST)
             user.update(overview=str(request.POST['overview']))
-            user.update(pphone=str(request.POST['pphone']))
+            if(request.POST['pphone']!=None):
+                user.update(pphone=str(request.POST['pphone']))
+            else:
+                user.update(pphone=' ')
             return redirect('/myprofile') 
             
         except:

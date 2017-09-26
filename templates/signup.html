@@ -1,65 +1,37 @@
 <!DOCTYPE html>
-{% include 'index.html' %}
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="favicon.ico">
-
-    <title>SSInRc Online Judge Login System</title>
+    {% include "header.html" %}
     {% load staticfiles %}
-    <!-- Bootstrap core CSS -->
-    <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static "signin.css" %}" rel="stylesheet">
-    <style>
-      .button {
-          background-color: #A9A9A9; /* DarkGray */
-          border: none;
-          color: white;
-          padding: 15px 25px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-          cursor: pointer;
-          -webkit-transition-duration: 0.4s; /* Safari */
-          transition-duration: 0.4s;
-      }
-
-      .button1:hover {
-          box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-      }
-      </style>
+    <link rel="stylesheet" href="{% static "sign.css" %}">
   </head>
-
-
   <body>
-
-    <div class="container">
-
-      <form class="form-signin" action="/signup" method="post">
-        <h2 class="form-signin-heading">Please sign up</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="email" name='email' class="form-control" placeholder="Email address" value="{{ email }}" required autofocus>
-        <label for="inputusername" class="sr-only">Name</label>
-        <input type="username" id="username" name='name' class="form-control" placeholder="name" value="{{ name }}" required>
-        <label for="inputpassword" class="sr-only">password</label>
-        <input type="password" id="password" name='password' class="form-control" placeholder="password" required>
-        <label for="reinputpassword" class="sr-only">repeatpassword</label>
-        <input type="password" id="repassword" name='repassword' class="form-control" placeholder="repassword" required>
+    {% include "navbar.html" %}
+    <br>
+    <div class="row">    
+      <div class="col"></div>     
+      <form class="col-lg-4 out col-xs-8" action="/signin" method="post" >
+        <label>Email address</label>
+        <div class="form-group">          
+          <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Enter email" autofocus required>
+        </div>
+        <label>Name</label>
+        <div class="form-group">          
+          <input type="text" class="form-control" id="name" name='name'  placeholder="Enter name" required>
+        </div>
+        <label>Password</label>
+        <div class="form-group">  
+          <input type="password" class="form-control" id="password" name='password' placeholder="Password" required>
+        </div>
+        <label>Comfirm Password</label>
+        <div class="form-group">  
+          <input type="password" class="form-control" id="repassword" name='repassword' placeholder="Comfirm password" required>
+        </div>
         {% csrf_token %}
-        <button class="button button1" type="submit">Sign up</button>
-        <p>{{ error }}</p>
-      </form>
-
-    </div> <!-- /container -->
-
-
-
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <p>{{error}}</p>
+      </form>       
+      <div class="col"></div>      
+    </div>
   </body>
 </html>
