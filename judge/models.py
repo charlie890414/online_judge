@@ -18,6 +18,8 @@ class member(models.Model):
         ('Web(HTML,CSS,JavaScript)', 'Web(HTML,CSS,JavaScript)')
     )
     choice = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True)
+    create = models.DateTimeField(auto_now_add=True)
+    
 
     def __str__(self):
         return self.name
@@ -65,7 +67,11 @@ class problem(models.Model):
         return self.title
 
 def generate_submissionfilename(self, filename):
-    url = "static/submission/%s/%s/%s/" % (self.member.name,self.problem.id,datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))
+    if self.lang == "python3":
+        file='py'
+    elif self.lang == "c++":
+        file='cpp'
+    url = "static/submission/%s/%s/%s/code.%s" % (self.member.name,self.problem.id,datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"),file)
     return url
 class submission(models.Model):
     member = models.ForeignKey('member',to_field = 'name')
