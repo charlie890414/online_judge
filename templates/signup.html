@@ -3,11 +3,12 @@
   <head>
     {% include "header.html" %}
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "signup.css" %}">
+    <link rel="stylesheet" href="{% static "sign.css" %}">
   </head>
   <body>
     {% include "navbar.html" %}
     <div class="row"> 
+      <div class="col"></div>
       <form class="col-10 col-xs-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 out" action="/signup" method="post" >
         <label>Email address</label>
         <div class="form-group">          
@@ -28,7 +29,8 @@
         {% csrf_token %}
         <button type="submit" class="btn btn-primary">Submit</button>
         <p>{{error}}</p>
-      </form>        
+      </form>       
+      <div class="col"></div> 
     </div>
   </body>
 </html>

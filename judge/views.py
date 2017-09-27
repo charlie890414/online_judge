@@ -119,4 +119,6 @@ def submits(request):
             return redirect('/myprofile')
         except:
             return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})
-
+def status(request):
+    obj = submission.objects.all()
+    return render(request,'status.html',{"submission" : obj})

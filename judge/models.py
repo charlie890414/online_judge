@@ -9,8 +9,9 @@ class member(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     AC = models.IntegerField(default=0)
-    overview = models.CharField(max_length=500, default="No any introduce!", blank=True)
-    pphone = models.CharField(blank=True,default=' ',max_length=10)
+    AC_problem = models.TextField(default="",blank=True)
+    overview = models.CharField(max_length=500, default="",blank=True)
+    pphone = models.CharField(blank=True,default="",max_length=10)
     LANGUAGE_CHOICES = (
         ('C/C++', 'C/C++'),
         ('Python', 'Python'),
@@ -19,11 +20,11 @@ class member(models.Model):
     )
     choice = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True)
     create = models.DateTimeField(auto_now_add=True)
-    
+    edit = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
-
+    
     def get_name(request):
         user = member.objects.get(email=request.session['email'])
         return user.name
@@ -41,8 +42,11 @@ class member(models.Model):
         del request.session['statue']
         del request.session['email']
         return request
+    def get_AC(self):
+        return self.AC_problem.split();
     def save(self, *args, **kwargs):
         self.password=make_password(self.password)
+        self.AC = len(self.get_AC())
         super(member, self).save(*args, **kwargs)
 
 class new(models.Model):

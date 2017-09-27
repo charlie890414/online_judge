@@ -1,0 +1,9 @@
+.row{
+  width:100%;
+}
+.out{
+  margin-top: 50px;
+  border: 1.5px solid #BDBCBC;
+  border-radius: 0.5em;
+  padding:2%;
+} 

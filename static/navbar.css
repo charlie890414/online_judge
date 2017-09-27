@@ -7,3 +7,6 @@ html {
 .navbar {
 	box-shadow: 0px 0px 10px #888;
 }
+.row {
+	width:100%;
+}

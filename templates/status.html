@@ -13,17 +13,19 @@
                       <tr>
                         <th style="text-align:center;">#</th>
                         <th style="text-align:center;">Name</th>
-                        <th style="text-align:center;">AC</th>
-                        <th style="text-align:center;">Last edit time</th>
+                        <th style="text-align:center;">Problem</th>
+                        <th style="text-align:center;">Status</th>
+                        <th style="text-align:center;">Lang</th>
                       </tr>
                     </thead>
                     <tbody>
-                        {% for u in users %}
+                        {% for i in submission %}
                         <tr>
-                            <td align="center">{{ u.id }}</td>
-                            <td align="center"><a href="/profile={{ u.name }}" style="color:black;">{{ u.name }}</a> </td>
-                            <td align="center">{{ u.AC }}</td>
-                            <td align="center">{{ u.edit }}</td>
+                            <td align="center">{{ i.id }}</td>
+                            <td align="center">{{ i.member }}</td>
+                            <td align="center">{{ i.problem }}</td>
+                            <td align="center">{{ i.status }}</td>
+                            <td align="center">{{ i.lang }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

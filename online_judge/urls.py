@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from judge.views import index, signup, signin, logout, ranks, profiles ,collection, mypro, submits
+from judge.views import *
 
 from django.conf.urls.static import static
 from .settings import STATIC_URL
@@ -31,4 +31,5 @@ urlpatterns = [
     url(r'^myprofile', mypro),
     url(r'^submit', submits),
     url(r'^collection', collection),
+    url(r'^status', status),
 ]+ static(STATIC_URL, document_root=STATIC_URL)
