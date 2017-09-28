@@ -1,0 +1,61 @@
+{% load staticfiles %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static "collection2.css" %}"> 
+	<link rel="stylesheet" href="{% static "w3.css" %}">
+
+<head>
+	<style>
+	table, td, th {    
+		border: 1px solid #ddd;
+		text-align: left;
+	}
+		
+	table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+		
+	th, td {
+		padding: 15px;
+	}
+	</style>
+	{% include "header.html" %}
+</head>
+{% include "navbar.html" %}
+
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:200px">
+	<h3 class="w3-bar-item">Menu</h3>
+	<a href="#" class="w3-bar-item w3-button">AC</a>
+	<a href="#" class="w3-bar-item w3-button">C/C++</a>
+	<a href="#" class="w3-bar-item w3-button">Python</a>
+	<a href="#" class="w3-bar-item w3-button">Java</a>
+</div>
+<div style="margin-left:200px">
+	
+<div class="w3-container" >
+	<h1>Collections</h1>
+</div>
+
+<table>
+	<tr>
+	  <th>No.</th>
+	  <th>Name</th>
+	</tr>
+	{% for n in problems %}
+	<tr>
+		<td>{{ n.id }}</td>
+		<td>{{ n.title }}</td>
+	</tr>
+	{% endfor %}
+</table>
+
+{% for n in new %}
+	<p><h1>{{ n.title }}</h1></p>
+	<p><h3>{{ n.contain }}</h3></p>
+	<br/>
+{% endfor %}

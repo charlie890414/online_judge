@@ -1,62 +1,44 @@
-{% load staticfiles %}
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="{% static "collection2.css" %}"> 
-	<link rel="stylesheet" href="{% static "w3.css" %}">
-
-<head>
-	<style>
-	table, td, th {    
-		border: 1px solid #ddd;
-		text-align: left;
-	}
-		
-	table {
-		border-collapse: collapse;
-		width: 100%;
-	}
-		
-	th, td {
-		padding: 15px;
-	}
-	</style>
-	{% include "header.html" %}
-</head>
-{% include "navbar.html" %}
-
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:200px">
-	<h3 class="w3-bar-item">Menu</h3>
-	<a href="#" class="w3-bar-item w3-button">AC</a>
-	<a href="#" class="w3-bar-item w3-button">C/C++</a>
-	<a href="#" class="w3-bar-item w3-button">Python</a>
-	<a href="#" class="w3-bar-item w3-button">Java</a>
-</div>
-<div style="margin-left:200px">
-	
-<div class="w3-container" >
-	<h1>Collections</h1>
-</div>
-
-<table>
-	<tr>
-	  <th>No.</th>
-	  <th>Name</th>
-	  <th>Deadline</th>
-	</tr>
-	{% for n in problems %}
-	<tr>
-		<td>{{ n.id }}</td>
-		<td>{{ n.title }}</td>
-	</tr>
-	{% endfor %}
-</table>
-
-{% for n in new %}
-	<p><h1>{{ n.title }}</h1></p>
-	<p><h3>{{ n.contain }}</h3></p>
-	<br/>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "header.html" %}
+        {% load staticfiles %}
+    </head>
+    <body>
+        {% include "navbar.html" %}
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                      <tr>
+                        <th style="text-align:center;">#</th>
+                        <th style="text-align:center;">Title</th>
+                        <th style="text-align:center;">Author</th>
+                        <th style="text-align:center;">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for n in problems %}
+                        <tr>
+                            <td align="center">{{ n.id }}</td>
+                            <td align="center">{{ n.title }}</td>
+                            <td align="center">{{ n.author }}</td>
+                            <td align="center"></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+    </body>
+</html>

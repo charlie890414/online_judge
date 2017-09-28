@@ -121,7 +121,8 @@ def submits(request):
             return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})
 def status(request):
     obj = submission.objects.all()
-    if request.session['statue'] == 'login':
-        return render(request, 'status.html', {'login':True,"submission":obj,'name':member.get_name(request)})
-    else :
-        return render(request, 'status.html', {'login':True,"submission":obj})
+    try:
+        if request.session['statue'] == 'login':
+            return render(request, 'status.html', {'login':True,"submission":obj,'name':member.get_name(request)})
+    except:
+        return render(request, 'status.html', {"submission":obj})

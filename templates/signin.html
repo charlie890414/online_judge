@@ -9,19 +9,24 @@
     {% include "navbar.html" %}
     <div class="row"> 
       <div class="col"></div>
-      <form class="col-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 out" action="/signin" method="post" >
-        <label>Email address</label>
-        <div class="form-group">          
-          <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Enter email" autofocus required>
-        </div>
-        <label>Password</label>
-        <div class="form-group">  
-          <input type="password" class="form-control" id="password" name='password' placeholder="Password" required>
-        </div>
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <p>{{error}}</p>
-      </form>   
+      <div class="card col-10 col-xs-10 col-sm-8 col-md-6 col-lg-6 col-xl-4 out">
+          <div class="card-header">Signin</div>
+          <div class="card-body">
+              <form class="" action="/signin" method="post" >
+                <label>Email address</label>
+                <div class="form-group">          
+                  <input type="email" class="form-control" id="email" name='email' aria-describedby="emailHelp" placeholder="Enter email" autofocus required>
+                </div>
+                <label>Password</label>
+                <div class="form-group">  
+                  <input type="password" class="form-control" id="password" name='password' placeholder="Password" required>
+                </div>
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <p>{{error}}</p>
+              </form>
+          </div>
+        </div>        
       <div class="col"></div>  
     </div>
   </body>
