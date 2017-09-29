@@ -32,4 +32,5 @@ urlpatterns = [
     url(r'^submit', submits),
     url(r'^collection', collection),
     url(r'^status', status),
+    url(r'^info', info),
 ]+ static(STATIC_URL, document_root=STATIC_URL)

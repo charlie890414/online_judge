@@ -126,3 +126,5 @@ def status(request):
             return render(request, 'status.html', {'login':True,"submission":obj,'name':member.get_name(request)})
     except:
         return render(request, 'status.html', {"submission":obj})
+def info(request):
+    return render(request, 'info.html')

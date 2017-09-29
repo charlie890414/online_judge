@@ -20,7 +20,7 @@ class member(models.Model):
     )
     choice = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True)
     create = models.DateTimeField(auto_now_add=True)
-    edit = models.DateTimeField(auto_now=True)
+    update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
