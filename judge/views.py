@@ -108,7 +108,11 @@ def submits(request):
                 user.update(pphone=str(request.POST['pphone']))
             else:
                 user.update(pphone=' ')
+
             languages = request.POST.getlist('language')
+            gender = request.POST.get('Gender')
+            user.update(gender=gender)
+            user.update(lang="  ".join(languages))
             print(languages)
             return redirect('/myprofile') 
             

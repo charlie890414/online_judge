@@ -118,11 +118,6 @@
 <!-- Form Name -->
 <br/>
 <!-- Text input-->
-
-
-
-
-<div class="form-group">
   <label class="col-md-4 control-label" for="Name (Full name)">Name (Full name)</label>
   <div class="col-md-4">
  <div class="input-group">
@@ -132,52 +127,21 @@
        </div>
        <p class="form-control input-md">{{ user.name }}</p>
       </div>
-
-
-  </div>
-
-
-</div>
-
-<!-- Multiple Radios (inline) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="Gender">Gender</label>
-  <div class="col-md-4">
-    <label class="radio-inline" for="Gender-0">
-      <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
-      Male
-    </label>
-    <label class="radio-inline" for="Gender-1">
-      <input type="radio" name="Gender" id="Gender-1" value="2">
-      Female
-    </label>
-    <label class="radio-inline" for="Gender-2">
-      <input type="radio" name="Gender" id="Gender-2" value="3">
-      Other
-    </label>
   </div>
 </div>
 
 <!-- Multiple Radios (inline) -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="radios">Marital Status:</label>
+  <label class="col-md-4 control-label" for="Gender">gender </label>
   <div class="col-md-4">
-    <label class="radio-inline" for="radios-0">
-      <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
-      Single
-    </label>
-    <label class="radio-inline" for="radios-1">
-      <input type="radio" name="radios" id="radios-1" value="2">
-      In a relationship
-    </label>
-    <label class="radio-inline" for="radios-2">
-      <input type="radio" name="radios" id="radios-2" value="3">
-      It's complicated
-    </label>
+  <div class="input-group">
+       <div class="input-group-addon">
+     <i class="fa fa-phone"></i>
+       </div>
+    <p class="form-control input-md">{{ user.gender }}</p>
+      </div>
   </div>
 </div>
-
-
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="Phone number ">Phone number </label>
@@ -185,13 +149,9 @@
   <div class="input-group">
        <div class="input-group-addon">
      <i class="fa fa-phone"></i>
-
        </div>
     <p class="form-control input-md">{{ user.pphone }}</p>
-
       </div>
-      
-
   </div>
 </div>
 
@@ -202,54 +162,22 @@
   <div class="input-group">
        <div class="input-group-addon">
      <i class="fa fa-envelope-o"></i>
-
        </div>
     <p class="form-control input-md">{{ user.email }}</p>
-
       </div>
-
   </div>
 </div>
 
 <!-- Multiple Checkboxes -->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="Languages Known">Languages Known</label>
+  <label class="col-md-4 control-label" for="lang">Language Known</label>
   <div class="col-md-4">
-  <div class="checkbox">
-    <label for="Languages Known-0">
-      <input type="checkbox" name="Languages Known" id="Languages Known-0" value="1">
-      C/C++
-    </label>
-    </div>
-  <div class="checkbox">
-    <label for="Languages Known-1">
-      <input type="checkbox" name="Languages Known" id="Languages Known-1" value="2">
-      Python
-    </label>
-    </div>
-  <div class="checkbox">
-    <label for="Languages Known-2">
-      <input type="checkbox" name="Languages Known" id="Languages Known-2" value="3">
-      Java
-    </label>
-    </div>
-  <div class="checkbox">
-    <label for="Languages Known-3">
-      <input type="checkbox" name="Languages Known" id="Languages Known-3" value="4">
-      Web(HTML,CSS,JavaScript)
-    </label>
-    </div>
-
-<div class="othertop">
-    <label for="Languages Known-4">
-
-
-
-    </label>
-
-     <input type="input" name="LanguagesKnown" id="Languages Known-4"  placeholder="Other Language">
-    </div>
-
+  <div class="input-group">
+       <div class="input-group-addon">
+     <i class="fa fa-phone"></i>
+       </div>
+    <p class="form-control input-md">{{ user.lang }}</p>
+      </div>
   </div>
 </div>
 
@@ -267,8 +195,6 @@
 <div class="col-md-2 hidden-xs">
 <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
   </div>
-
-
 </div>
    </div>
     <!-- jQuery Version 1.11.1 -->

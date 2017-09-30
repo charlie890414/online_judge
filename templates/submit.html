@@ -112,10 +112,6 @@
 <!-- Form Name -->
 <br/>
 <!-- Text input-->
-
-
-
-
 <div class="form-group">
   <label class="col-md-4 control-label" for="Name (Full name)">Name (Full name)</label>
   <div class="col-md-4">
@@ -126,11 +122,7 @@
        </div>
        <text id="Name (Full name)" name="Name (Full name)" type="text" placeholder="Name (Full name)" class="form-control input-md">{{ user.name }}</text>
       </div>
-
-
   </div>
-
-
 </div>
 
 <!-- Multiple Radios (inline) -->
@@ -138,39 +130,20 @@
   <label class="col-md-4 control-label" for="Gender">Gender</label>
   <div class="col-md-4">
     <label class="radio-inline" for="Gender-0">
-      <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
+      <input type="radio" name="Gender" id="Gender-0" value="Male" checked="checked">
       Male
     </label>
     <label class="radio-inline" for="Gender-1">
-      <input type="radio" name="Gender" id="Gender-1" value="2">
+      <input type="radio" name="Gender" id="Gender-1" value="Female">
       Female
     </label>
     <label class="radio-inline" for="Gender-2">
-      <input type="radio" name="Gender" id="Gender-2" value="3">
+      <input type="radio" name="Gender" id="Gender-2" value="Other">
       Other
     </label>
+    <p>{{ user.gender }}</p>
   </div>
 </div>
-
-<!-- Multiple Radios (inline) -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="radios">Marital Status:</label>
-  <div class="col-md-4">
-    <label class="radio-inline" for="radios-0">
-      <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
-      Single
-    </label>
-    <label class="radio-inline" for="radios-1">
-      <input type="radio" name="radios" id="radios-1" value="2">
-      In a relationship
-    </label>
-    <label class="radio-inline" for="radios-2">
-      <input type="radio" name="radios" id="radios-2" value="3">
-      It's complicated
-    </label>
-  </div>
-</div>
-
 
 <!-- Text input-->
 <div class="form-group">
@@ -179,13 +152,9 @@
   <div class="input-group">
        <div class="input-group-addon">
      <i class="fa fa-phone"></i>
-
        </div>
     <input id="Phone number " name="pphone" type="number" maxlength="10" placeholder="{{ user.pphone }}" class="form-control input-md">
-
-      </div>
-      
-
+    </div>
   </div>
 </div>
 
@@ -196,11 +165,9 @@
   <div class="input-group">
        <div class="input-group-addon">
      <i class="fa fa-envelope-o"></i>
-
        </div>
     <text id="Email Address" name="Email Address" type="text" placeholder="Email Address" class="form-control input-md">{{ user.email }}</text>
       </div>
-
   </div>
 </div>
 
@@ -232,17 +199,12 @@
       Web(HTML,CSS,JavaScript)
     </label>
     </div>
-
 <div class="othertop">
     <label for="4">
-
-
-
     </label>
-
-     <input type="input" name="language" id="language"  placeholder="Other Language">
+      <input type="input" name="language" id="language"  placeholder="Other Language">
     </div>
-
+    <p>{{ user.lang }}</p>
   </div>
 </div>
 
@@ -262,21 +224,16 @@
   <a href="#" class="button2" value=""><span class="button2">clear</span></a>
   </div>
 </div>
-
 </fieldset>
 </form>
-
 </div>
 <div class="col-md-2 hidden-xs">
 <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
   </div>
-
-
 </div>
    </div>
     <!-- jQuery Version 1.11.1 -->
     <script src="js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 

@@ -3,7 +3,7 @@ from .models import *
 # Register your models here.
 
 class showmember(admin.ModelAdmin):
-    list_display = ('name','email','AC','AC_problem','choice') # list
+    list_display = ('name','email','AC','AC_problem') # list
 
 class shownew(admin.ModelAdmin):
     list_display = ('title', 'contain') # list

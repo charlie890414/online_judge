@@ -12,15 +12,12 @@ class member(models.Model):
     AC_problem = models.TextField(default="",blank=True)
     overview = models.CharField(max_length=500, default="",blank=True)
     pphone = models.CharField(blank=True,default="",max_length=10)
-    LANGUAGE_CHOICES = (
-        ('C/C++', 'C/C++'),
-        ('Python', 'Python'),
-        ('Java', 'Java'),
-        ('Web(HTML,CSS,JavaScript)', 'Web(HTML,CSS,JavaScript)')
-    )
-    choice = MultiSelectField(choices=LANGUAGE_CHOICES, blank=True)
+    
     create = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
+
+    lang = models.CharField(max_length=50, blank=True)
+    gender = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return self.name
