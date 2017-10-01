@@ -33,4 +33,5 @@ urlpatterns = [
     url(r'^collection', collection),
     url(r'^status', status),
     url(r'^info', info),
+    url(r'^problem=(\d+)', prob),
 ]+ static(STATIC_URL, document_root=STATIC_URL)

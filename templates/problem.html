@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "header.html" %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-filestyle/1.3.0/bootstrap-filestyle.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+        {% load staticfiles %}
+    </head>
+    <body>
+        {% include "navbar.html" %}
+        <div class="container" style="margin-top:50px;">
+            <div class="card" style="margin:20px;">
+                <div class="card-header">
+                    Title
+                </div>
+                <div class="card-body">
+                    {{ problem.title }}
+                </div>
+            </div>
+            <div class="card" style="margin:20px;">
+                <div class="card-header">
+                        Context
+                </div>
+                <div class="card-body">
+                    {{ problem.context }}
+                </div>
+            </div>
+            <div class="card" style="margin:20px;">
+                <div class="card-header">
+                        Sample input & output
+                </div>
+                <div class="card-body">
+                        <label>Input:</label>         
+                        <pre style="color: #DDD;
+                        border-radius: 2px;
+                        padding: 0.5em;
+                        background: #272822;">{{ problem.samplein }}</pre>
+                        <label>Output:</label>         
+                        <pre style="color: #DDD;
+                        border-radius: 2px;
+                        padding: 0.5em;
+                        background: #272822;">{{ problem.sampleout }}</pre>  
+                </div>
+            </div>
+            <div class="card" style="margin:20px;">
+                <div class="card-header">
+                    Submit
+                </div>
+                <div class="card-body">
+                    <form action="/problem={{ problem.id }}" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Lang</label>
+                            <select class="form-control" id="selectList" name='lang'>
+                                <option value="c++" selected>C++</option>
+                                <option value="python3">python3</option>
+                            </select>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:100%;">
+                                Option
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:100%;">
+                                <a class="dropdown-item" id="File_upload">File upload</a>
+                                <a class="dropdown-item" id="Editor">Editor</a>
+                            </div>
+                        </div>
+                        <div id="texteditor">
+                            <br>
+                            <label>Editor</label>
+                            <div id="editor" style="min-height:300px"></div>
+                            
+                            <textarea class="form-control" name="editor" style="display: none;"></textarea>                 
+                        </div>                        
+                        <div class="file_upload">
+                            <br>
+                            <label>File upload</label>
+                            <br>
+                            <input type="file" class="filestyle" name='file' data-text="Browse">
+                        </div>
+                        <br>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary" style="width:100%;">Submit</button>
+                    </form>             
+                </div>
+            </div>
+        </div>        
+    </body>
+    <script>
+        $(":file").filestyle({text: "Find file"});
+        $('div.file_upload').show();
+        $('div#editor').hide()
+        $('div#texteditor').hide()        
+        $('a#File_upload').click(function(){
+            $('div.file_upload').show();
+            $('div#editor').hide()
+            $('div#texteditor').hide()     
+        })
+        $('a#Editor').click(function(){
+            $('div.file_upload').hide();
+            $('div#texteditor').show() 
+            $('div#editor').show()    
+            var editor = ace.edit('editor');
+            var textarea = $('textarea[name="editor"]');
+            editor.setTheme("ace/theme/chrome");
+            var code;
+            if($('#selectList').val() == 'c++') code = 'c_cpp';
+            else if($('#selectList').val() == 'python3') code = 'python';
+            editor.session.setMode("ace/mode/"+code);
+            editor.setFontSize(18);
+            editor.getSession().on("change", function () {
+                textarea.val(editor.getSession().getValue());
+            });
+        })
+        $('#selectList').change(function(){
+            var code;
+            var editor = ace.edit('editor');
+            var textarea = $('textarea[name="editor"]');editor.setTheme("ace/theme/chrome");
+            var code;
+            if($('#selectList').val() == 'c++') code = 'c_cpp';
+            else if($('#selectList').val() == 'python3') code = 'python';
+            editor.session.setMode("ace/mode/"+code);
+            editor.setFontSize(18);
+            editor.getSession().on("change", function () {
+                textarea.val(editor.getSession().getValue());
+            });
+        })
+    </script>
+</html>

@@ -132,3 +132,19 @@ def status(request):
         return render(request, 'status.html', {"submission":obj})
 def info(request):
     return render(request, 'info.html')
+def prob(request, pid):
+    print(request.POST)
+    if request.method == 'POST':
+        if request.FILES:
+            print(request.FILES)
+            newsubmit = submission.objects.create(member=member.objects.get(email=request.session['email']),problem=problem.objects.get(id=pid),lang=request.POST['lang'],code=request.FILES['file'])
+            return redirect('/status')
+    if request.method == 'GET':
+        prob = problem.objects.get(id=pid)
+        try:
+            if request.session['statue'] == 'login':
+                return render(request, 'problem.html', {'users' :users, 'login':True,'name':member.get_name(request), 'problem':prob})
+
+        except:
+            return render(request,'problem.html', {'problem':prob})
+
