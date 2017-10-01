@@ -40,7 +40,7 @@ class member(models.Model):
         del request.session['email']
         return request
     def get_AC(self):
-        return str(self.AC_problem).split();
+        return str(self.AC_problem).split(' ')
 
     def save(self, *args, **kwargs):
         self.password=make_password(self.password)
