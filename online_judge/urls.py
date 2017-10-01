@@ -30,8 +30,8 @@ urlpatterns = [
     url(r'^profile=(\w+)', profiles),
     url(r'^myprofile', mypro),
     url(r'^submit', submits),
-    url(r'^collection', collection),
-    url(r'^status', status),
+    url(r'^collection=(\d+)', collection),
+    url(r'^status=(\d+)', status),
     url(r'^info', info),
     url(r'^problem=(\d+)', prob),
 ]+ static(STATIC_URL, document_root=STATIC_URL)

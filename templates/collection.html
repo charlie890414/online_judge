@@ -8,7 +8,7 @@
         {% include "navbar.html" %}
         <div class="container" style="margin-top:50px;">
             <div class="row">
-                <div class="col"> 
+                <div class="col">
                     <nav class="bg-light sidebar">
                             <ul class="nav nav-pills flex-column">
                                 <li class="nav-item">
@@ -40,19 +40,11 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                </ul>
-                            </nav>
+                            {% include "paginator.html" %}
                 </div>
             </div>
-            
+
         </div>
-        
+
     </body>
 </html>

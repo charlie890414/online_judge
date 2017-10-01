@@ -29,36 +29,7 @@
                     </tbody>
                 </table>
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
+            {% include "paginator.html" %}
         </div>
-        {% if users.has_other_pages %}
-  <ul class="pagination">
-    {% if users.has_previous %}
-      <li class="page-item"><a class="page-link" href="rank={{ users.previous_page_number }}">&laquo;</a></li>
-    {% else %}
-      <li class="disabled page-item"><span>&laquo;</span></li>
-    {% endif %}
-    {% for i in users.paginator.page_range %}
-      {% if users.number == i %}
-        <li class="active page-item"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-      {% else %}
-        <li class="page-item"><a href="rank={{ i }}">{{ i }}</a></li>
-      {% endif %}
-    {% endfor %}
-    {% if users.has_next %}
-      <li class="page-item"><a href="rank={{ users.next_page_number }}">&raquo;</a></li>
-    {% else %}
-      <li class="disabled page-item"><span>&raquo;</span></li>
-    {% endif %}
-  </ul>
-{% endif %}
     </body>
 </html>
