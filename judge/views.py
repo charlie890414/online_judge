@@ -86,7 +86,7 @@ def profiles(request, profile):
         return render(request, 'profiles.html', locals())
 
 def collection(request, collection):
-    user_list = problem.objects.all() #這是題目
+    user_list = problem.objects.all() #這是題目  
     users = paginate(request, collection, user_list)
     h = 'collection'
     if request.method == 'GET':
