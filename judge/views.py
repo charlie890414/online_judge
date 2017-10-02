@@ -181,8 +181,23 @@ def showsubmission(request, pid):
     except:
         error = ''
     try:
+        code = open(place+"\\code.py").read()
+    except:
+        try:
+            code = open(place+"\\code.cpp").read()
+        except:
+            code = ''
+
+    try:
         if request.session['statue'] == 'login':
-            return render(request, 'submission.html', {'login':True,'name':member.get_name(request), 'out':out,'error':error})
+            return render(request, 'submission.html', {'login':True,'name':member.get_name(request), 'out':out,'error':error,'code':code})
 
     except:
-        return render(request,'submission.html', {'out':out,'error':error})
+        return render(request,'submission.html', {'out':out,'error':error,'code':code})
+def miner(request):
+    try:
+        if request.session['statue'] == 'login':
+            return render(request, 'miner.html', {'login':True,'name':member.get_name(request)})
+
+    except:
+        return render(request,'miner.html')

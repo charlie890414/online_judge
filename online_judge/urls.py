@@ -16,7 +16,6 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from judge.views import *
-from judge.views import showsubmission
 
 from django.conf.urls.static import static
 from .settings import STATIC_URL
@@ -24,6 +23,7 @@ from .settings import STATIC_URL
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
+    url(r'^miner', miner),
     url(r'^signup', signup),
     url(r'^signin', signin),
     url(r'^logout', logout),

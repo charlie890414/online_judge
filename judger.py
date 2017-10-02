@@ -48,10 +48,9 @@ def rundocker(judging):
     print(out)
     try:
         if ans == out:
-            submission.objects.filter(id=judging.id).update(status='AC')
-            string = ' '+str(judging.problem.id)+' '
-            if judging.member.AC_problem.find(string) == -1:
-                member.objects.filter(id=judging.member.id).update(AC_problem=judging.member.AC_problem+string)
+            submission.objects.filter(id=judging.id).update(status='AC')            
+            if str(judging.problem.id) not in set(judging.member.AC_problem.split()):
+                member.objects.filter(id=judging.member.id).update(AC_problem=judging.member.AC_problem+' '+str(judging.problem.id)+' ')
                 member.objects.filter(id=judging.member.id).update(AC=judging.member.AC+1)
         else: 
             submission.objects.filter(id=judging.id).update(status='WA or Error')

@@ -21,7 +21,15 @@
                     <tbody>
                         {% for i in submission %}
                         <tr>
-                            <td align="center"><a href="/submission={{ i.id }}">{{ i.id }}</a></td>
+                            <td align="center">
+                                {% if i.member.name == name %}
+                                <a href="/submission={{ i.id }}">
+                                    {{ i.id }}
+                                </a>
+                                {% else %}
+                                    {{ i.id }}
+                                {% endif %}
+                            </td>
                             <td align="center">{{ i.member }}</td>
                             <td align="center">{{ i.problem }}</td>
                             <td align="center">{{ i.status }}</td>
