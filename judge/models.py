@@ -40,7 +40,7 @@ class member(models.Model):
         del request.session['email']
         return request
     def get_AC(self):
-        return str(self.AC_problem).split();
+        return str(self.AC_problem).split(' ')
 
     def save(self, *args, **kwargs):
         self.password=make_password(self.password)
@@ -63,7 +63,9 @@ class problem(models.Model):
     title = models.CharField(max_length=30,unique=True)
     author = models.ForeignKey('member',to_field = 'name')
     context = models.TextField()
-    test = models.FileField(upload_to=generate_questionfiletest,blank=True,null=True)
+    samplein = models.TextField(default="(None)")
+    sampleout = models.TextField(default="")
+    test = models.FileField(upload_to=generate_questionfiletest,null=True,blank=True)
     ans = models.FileField(upload_to=generate_questionfileans)
     def __str__(self):
         return self.title

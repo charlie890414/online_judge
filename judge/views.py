@@ -42,31 +42,35 @@ def index(request):
     except:
         return render(request,'index.html', locals())
 
-def ranks(request, rank):
-    user_list = member.objects.order_by('AC').reverse()
+def paginate(request, pg, user_list):
     page = request.GET.get('page', 1)
     paginator = Paginator(user_list, 10)
     if(user_list is not None):
         try:
-            users = paginator.page(int(rank))
+            users = paginator.page(int(pg))
         except PageNotAnInteger:
             users = paginator.page(1)
         except EmptyPage:
             users = paginator.page(paginator.num_pages)
-
-        try:
-            if request.session['statue'] == 'login':
-                return render(request, 'rank.html', {'users' :users, 'login':True,'name':member.get_name(request)})
-
-        except:
-            return render(request,'rank.html', locals())
+        return users
     else:
-        try:
-            if request.session['statue'] == 'login':
-                return render(request, 'rank.html', {'users' :users, 'login':True,'name':member.get_name(request), 'error' :'Has No User'})
+        users = None
+        return users
 
-        except:
-            return render(request,'rank.html', {'login':True,'name':member.get_name(request), 'error' :'Has No User'})
+
+def ranks(request, rank):
+    user_list = member.objects.order_by('AC').reverse()
+    users = paginate(request, rank, user_list)
+    h = 'rank'
+    print (h)
+    try:
+        if request.session['statue'] == 'login':
+            return render(request,'rank.html', {'login':True, 'name':member.get_name(request), 'users': users, 'h':h})
+        else:
+            return render(request,'rank.html', {'users': users, 'h':h})
+    except:
+        return render(request,'rank.html', locals())
+
 
 
 def profiles(request, profile):
@@ -77,15 +81,18 @@ def profiles(request, profile):
             return render(request,'profiles.html',{'login':True,'name':member.get_name(request), 'user':user})
     except:
         return render(request, 'profiles.html', locals())
-    
-def collection(request):
+
+def collection(request, collection):
+    user_list = problem.objects.all() #請勿改名 涵式需要 這是題目
+    users = paginate(request, collection, user_list)
+    h = 'collection'
     if request.method == 'GET':
-        
+
         problems = problem.objects.all()
         print(problems)
         try:
             if request.session['statue'] == 'login':
-                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':problems})
+                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':problems, 'users':users,'h':h})
         except:
             return render(request,'collection.html', locals())
 
@@ -114,8 +121,8 @@ def submits(request):
             user.update(gender=gender)
             user.update(lang="  ".join(languages))
             print(languages)
-            return redirect('/myprofile') 
-            
+            return redirect('/myprofile')
+
         except:
             return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})
     elif request.method == 'GET':
@@ -123,12 +130,29 @@ def submits(request):
             return redirect('/myprofile')
         except:
             return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})
-def status(request):
+def status(request, status):
     obj = submission.objects.all()
+    users = paginate(request, status, obj)
+    h = 'status'
     try:
         if request.session['statue'] == 'login':
-            return render(request, 'status.html', {'login':True,"submission":obj,'name':member.get_name(request)})
+            return render(request, 'status.html', {'login':True,"submission":obj,'name':member.get_name(request), 'users':users, 'h':h})
     except:
-        return render(request, 'status.html', {"submission":obj})
+        return render(request, 'status.html', {"submission":obj, 'users':users, 'h':h})
 def info(request):
     return render(request, 'info.html')
+def prob(request, pid):
+    print(request.POST)
+    if request.method == 'POST':
+        if request.FILES:
+            print(request.FILES)
+            newsubmit = submission.objects.create(member=member.objects.get(email=request.session['email']),problem=problem.objects.get(id=pid),lang=request.POST['lang'],code=request.FILES['file'])
+            return redirect('/status')
+    if request.method == 'GET':
+        prob = problem.objects.get(id=pid)
+        try:
+            if request.session['statue'] == 'login':
+                return render(request, 'problem.html', {'users' :users, 'login':True,'name':member.get_name(request), 'problem':prob})
+
+        except:
+            return render(request,'problem.html', {'problem':prob})
