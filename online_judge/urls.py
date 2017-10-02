@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from judge.views import *
+from judge.views import showsubmission
 
 from django.conf.urls.static import static
 from .settings import STATIC_URL
@@ -34,4 +35,5 @@ urlpatterns = [
     url(r'^status=(\d+)', status),
     url(r'^info', info),
     url(r'^problem=(\d+)', prob),
+    url(r'^submission=(\d+)', showsubmission),
 ]+ static(STATIC_URL, document_root=STATIC_URL)

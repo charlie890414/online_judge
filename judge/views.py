@@ -6,6 +6,9 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.files import File
+import os
+import time
 
 def signup(request):
     if request.method == 'GET':
@@ -148,11 +151,38 @@ def prob(request, pid):
             print(request.FILES)
             newsubmit = submission.objects.create(member=member.objects.get(email=request.session['email']),problem=problem.objects.get(id=pid),lang=request.POST['lang'],code=request.FILES['file'])
             return redirect('/status')
+        elif request.POST['editor']:
+            print(request.POST['editor'])
+            name = '%s' % (time.time())
+            file = open(name, 'w+')
+            file.write(request.POST['editor'])
+            print(type(file))
+            newsubmit = submission.objects.create(member=member.objects.get(email=request.session['email']),problem=problem.objects.get(id=pid),lang=request.POST['lang'],code=File(file))
+            file.close()
+            os.remove(name)
+        return redirect('/status=1')
     if request.method == 'GET':
         prob = problem.objects.get(id=pid)
         try:
             if request.session['statue'] == 'login':
-                return render(request, 'problem.html', {'users' :users, 'login':True,'name':member.get_name(request), 'problem':prob})
+                return render(request, 'problem.html', {'login':True,'name':member.get_name(request), 'problem':prob})
 
         except:
             return render(request,'problem.html', {'problem':prob})
+def showsubmission(request, pid):
+    submit = submission.objects.get(id=pid)
+    place = os.path.join(os.getcwd(), os.path.dirname(str(submit.code).replace('/','\\')))
+    try:
+        out = open(place+"\\out.txt").read()
+    except:
+        out = ''
+    try:
+        error = open(place+"\\error.txt").read()
+    except:
+        error = ''
+    try:
+        if request.session['statue'] == 'login':
+            return render(request, 'submission.html', {'login':True,'name':member.get_name(request), 'out':out,'error':error})
+
+    except:
+        return render(request,'submission.html', {'out':out,'error':error})

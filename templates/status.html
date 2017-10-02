@@ -21,7 +21,7 @@
                     <tbody>
                         {% for i in submission %}
                         <tr>
-                            <td align="center">{{ i.id }}</td>
+                            <td align="center"><a href="/submission={{ i.id }}">{{ i.id }}</a></td>
                             <td align="center">{{ i.member }}</td>
                             <td align="center">{{ i.problem }}</td>
                             <td align="center">{{ i.status }}</td>

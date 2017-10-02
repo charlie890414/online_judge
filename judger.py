@@ -20,14 +20,14 @@ def rundocker(judging):
     to2 = "/tmp/code"
     if judging.problem.test=="":
         if judging.lang == "python3":
-            bash = "\"python3 tmp/code/* > tmp/code/out.txt\""
+            bash = "\"python3 tmp/code/* &> tmp/code/out.txt\""
         elif judging.lang == "c++":
-            bash = "\"g++ tmp/code/*.cpp -o tmp/code/a.exe;tmp/code/a.exe > tmp/code/out.txt\""
+            bash = "\"g++ tmp/code/*.cpp -o tmp/code/a.exe 2> tmp/code/error.txt;tmp/code/a.exe &> tmp/code/out.txt\""
     else:
         if judging.lang == "python3":
-            bash = "\"python3 tmp/code/* < tmp/problem/in.txt > tmp/code/out.txt\""
+            bash = "\"python3 tmp/code/* < tmp/problem/test.txt &> tmp/code/out.txt\""
         elif judging.lang == "c++":
-            bash = "\"g++ tmp/code/*.cpp -o tmp/code/a.exe;tmp/code/a.exe < tmp/problem/in.txt > tmp/code/out.txt\""
+            bash = "\"g++ tmp/code/*.cpp -o tmp/code/a.exe 2> tmp/code/error.txt;tmp/code/a.exe < tmp/problem/test.txt &>> tmp/code/out.txt\""
     cmd = 'docker run -dit -v %s:%s -v %s:%s --memory="64M" --memory-swap="64M" --cpu-quota=75000 --name %s 4155b85753c5 bash -c %s' % (problem,to1,code,to2,name,bash)
     print(cmd)
     tmp = subprocess.Popen(cmd)
@@ -49,8 +49,9 @@ def rundocker(judging):
     try:
         if ans == out:
             submission.objects.filter(id=judging.id).update(status='AC')
-            if judging.member.AC_problem.find(str(judging.problem.id)+' ') == -1:
-                member.objects.filter(id=judging.member.id).update(AC_problem=judging.member.AC_problem+str(judging.problem.id)+' ')
+            string = ' '+str(judging.problem.id)+' '
+            if judging.member.AC_problem.find(string) == -1:
+                member.objects.filter(id=judging.member.id).update(AC_problem=judging.member.AC_problem+string)
                 member.objects.filter(id=judging.member.id).update(AC=judging.member.AC+1)
         else: 
             submission.objects.filter(id=judging.id).update(status='WA or Error')
