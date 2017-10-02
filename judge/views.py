@@ -169,3 +169,20 @@ def prob(request, pid):
 
         except:
             return render(request,'problem.html', {'problem':prob})
+def showsubmission(request, pid):
+    submit = submission.objects.get(id=pid)
+    place = os.path.join(os.getcwd(), os.path.dirname(str(submit.code).replace('/','\\')))
+    try:
+        out = open(place+"\\out.txt").read()
+    except:
+        out = ''
+    try:
+        error = open(place+"\\error.txt").read()
+    except:
+        error = ''
+    try:
+        if request.session['statue'] == 'login':
+            return render(request, 'submission.html', {'login':True,'name':member.get_name(request), 'out':out,'error':error})
+
+    except:
+        return render(request,'submission.html', {'out':out,'error':error})
