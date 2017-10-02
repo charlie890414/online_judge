@@ -23,7 +23,7 @@
                         Context
                 </div>
                 <div class="card-body">
-                    {{ problem.context }}
+                    <pre style="white-space: pre-wrap;word-wrap: break-word;">{{ problem.context }}</pre>
                 </div>
             </div>
             <div class="card" style="margin:20px;">
@@ -51,7 +51,7 @@
                     <form action="/problem={{ problem.id }}" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Lang</label>
-                            <select class="form-control" id="selectList" name='lang'>
+                            <select class="form-control custom-select" id="selectList" name='lang'>
                                 <option value="c++" selected>C++</option>
                                 <option value="python3">python3</option>
                             </select>

