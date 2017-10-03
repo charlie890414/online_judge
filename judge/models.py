@@ -12,7 +12,7 @@ class member(models.Model):
     AC_problem = models.TextField(default="",blank=True)
     overview = models.CharField(max_length=500, default="",blank=True)
     pphone = models.CharField(blank=True,default="",max_length=10)
-    
+
     create = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 
@@ -21,7 +21,7 @@ class member(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def get_name(request):
         user = member.objects.get(email=request.session['email'])
         return user.name
@@ -50,6 +50,7 @@ class member(models.Model):
 class new(models.Model):
     title = models.CharField(max_length=20)
     contain = models.CharField(max_length=500)
+    imgUrl = models.CharField(max_length=1000,blank=False,default="https://images.unsplash.com/photo-1484788984921-03950022c9ef?dpr=1&auto=compress,format&fit=crop&w=2004&h=&q=80&cs=tinysrgb&crop=")
 
     def __str__(self):
         return self.title
