@@ -95,7 +95,7 @@ def collection(request, collection):
         print(problems)
         try:
             if request.session['statue'] == 'login':
-                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':problems, 'users':users,'h':h})
+                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':users, 'h':h})
         except:
             return render(request,'collection.html', locals())
 
@@ -139,9 +139,9 @@ def status(request, status):
     h = 'status'
     try:
         if request.session['statue'] == 'login':
-            return render(request, 'status.html', {'login':True,"submission":obj,'name':member.get_name(request), 'users':users, 'h':h})
+            return render(request, 'status.html', {'login':True,"submission":users,'name':member.get_name(request), 'h':h})
     except:
-        return render(request, 'status.html', {"submission":obj, 'users':users, 'h':h})
+        return render(request, 'status.html', {"submission":users, 'h':h})
 def info(request):
     return render(request, 'info.html')
 def prob(request, pid):
