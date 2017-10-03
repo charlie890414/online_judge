@@ -29,6 +29,8 @@
                 <div class="form-group">  
                   <input type="password" class="form-control" id="repassword" name='repassword' placeholder="Comfirm password" required>
                 </div>
+                <script src='https://www.google.com/recaptcha/api.js'></script>
+                <div class="g-recaptcha" data-sitekey="6Lcn8DIUAAAAAMX7uxaBr5HLPYeV1VvES2kheKXU"></div>
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <p>{{error}}</p>
