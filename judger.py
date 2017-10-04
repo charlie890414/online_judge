@@ -44,16 +44,20 @@ def rundocker(judging):
     tmp = subprocess.call(cmd)
     ans =open(problem+"\\ans.txt").read()
     out =open(code+"\\out.txt").read()
+    error =open(code+"\\error.txt").read()
     print(ans)
     print(out)
+    print(error)
     try:
-        if ans == out:
+        if error != '':
+            submission.objects.filter(id=judging.id).update(status='Error')
+        elif ans == out:
             submission.objects.filter(id=judging.id).update(status='AC')            
             if str(judging.problem.id) not in set(judging.member.AC_problem.split()):
                 member.objects.filter(id=judging.member.id).update(AC_problem=judging.member.AC_problem+' '+str(judging.problem.id)+' ')
                 member.objects.filter(id=judging.member.id).update(AC=judging.member.AC+1)
         else: 
-            submission.objects.filter(id=judging.id).update(status='WA or Error')
+            submission.objects.filter(id=judging.id).update(status='WA')
     except:
         submission.objects.filter(id=judging.id).update(status='Error')
     finally:
