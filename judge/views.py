@@ -209,3 +209,10 @@ def miner(request):
 
     except:
         return render(request,'miner.html')
+def deep(request):
+    try:
+        if request.session['statue'] == 'login':
+            return render(request, 'deep.html', {'login':True,'name':member.get_name(request)})
+
+    except:
+        return render(request,'deep.html')

