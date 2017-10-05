@@ -22,7 +22,7 @@ def rundocker(judging):
         if judging.lang == "python3":
             bash = "\"python3 tmp/code/* > tmp/code/out.txt 2>>tmp/code/error.txt\""
         elif judging.lang == "c++":
-            bash = "\"g++ tmp/code/*.cpp -o tmp/code/a.exe 2> tmp/code/error.txt;tmp/code/a.exe > tmp/code/out.txt 2>>tmp/code/error.txt\""
+            bash = "\"g++ tmp/code/*.cpp -o tmp/code/a.exe 2> tmp/code/error.txt;tmp/code/a.exe > tmp/code/out.txt 2>> tmp/code/error.txt\""
     else:
         if judging.lang == "python3":
             bash = "\"python3 tmp/code/* < tmp/problem/test.txt > tmp/code/out.txt 2>>tmp/code/error.txt\""
