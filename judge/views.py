@@ -147,7 +147,7 @@ def submits(request):
         except:
             return render(request,'signin.html',{"error":"Sorry, your email or password is not correct."})
 def status(request, status):
-    obj = submission.objects.all()
+    obj = submission.objects.all().order_by('id').reverse()
     users = paginate(request, status, obj)
     h = 'status'
     try:
