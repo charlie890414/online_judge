@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		{% include "header.html" %}
+                {% include "header.html" %}
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<body>
 		{% include "navbar.html" %}
 		<div class="container" style="margin-top:50px;">
-            <div class="card" style="margin:20px;">
-                <div class="card-header">
-                        Output
+                <div class="card" style="margin:20px;">
+                        <div class="card-header">
+                                Output
+                        </div>
+                        <div class="card-body">
+                                <pre style="white-space: pre-wrap;word-wrap: break-word;">{{ code }}</pre>
+                                <pre style="white-space: pre-wrap;word-wrap: break-word;">{{ error }}</pre>
+                        </div>
                 </div>
-                <div class="card-body">
-                    <pre style="white-space: pre-wrap;word-wrap: break-word;">{{ code }}</pre>
-                    <pre style="white-space: pre-wrap;word-wrap: break-word;">{{ error }}</pre>
-                </div>
-        </div>
-	</body>
+        </body>
 </html>
 
 

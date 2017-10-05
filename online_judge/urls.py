@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^miner', miner),
+    url(r'^deep+', deep),
     url(r'^signup', signup),
     url(r'^signin', signin),
     url(r'^logout', logout),

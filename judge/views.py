@@ -9,15 +9,24 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files import File
 import os
 import time
+import requests
+import json
 
 def signup(request):
     if request.method == 'GET':
         return render(request,'signup.html')
     elif request.method == 'POST':
             print(request.POST)
+            url = 'https://api.coinhive.com/token/verify'
+            headers = {'Content-type':'application/x-www-form-urlencoded\r\n'}
+            data = {'secret' : "4rDiVo40ogqPc7ODxW4MBdMfelAAgxCb", 'token' : request.POST['coinhive-captcha-token'],'hashes' : 256}
+            r = requests.request('POST',url, data=data)
+            print(json.loads(r.content))
+            if json.loads(r.content)['success'] == False:
+                return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": json.loads(r.content)['error']})
             if request.POST['password'] != request.POST['repassword']:
                 return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": "password are not the same "})
-            try :
+            try :                
                 new_member = member.objects.create(name=request.POST['name'],email=request.POST['email'],password=make_password(request.POST['password']))
                 print(new_member)
                 return redirect('/signin')
@@ -40,8 +49,12 @@ def logout(request):
 def index(request):
     news = new.objects.all()
     try:
+        first = news[0]
+    except:
+        first = ''
+    try:
         if request.session['statue'] == 'login':
-            return render(request,'index.html',{'login':True,'name':member.get_name(request)})
+            return render(request,'index.html',{'login':True,'name':member.get_name(request),'news':news,'first':first})
     except:
         return render(request,'index.html', locals())
 
@@ -68,9 +81,9 @@ def ranks(request, rank):
     print (h)
     try:
         if request.session['statue'] == 'login':
-            return render(request,'rank.html', {'login':True, 'name':member.get_name(request), 'users': users, 'h':h})
+            return render(request,'rank.html', {'login':True, 'name':member.get_name(request), 'paginator': users,'users':users,'h':h})
         else:
-            return render(request,'rank.html', {'users': users, 'h':h})
+            return render(request,'rank.html', {'paginator': users, 'h':h, 'users':users})
     except:
         return render(request,'rank.html', locals())
 
@@ -95,7 +108,7 @@ def collection(request, collection):
         print(problems)
         try:
             if request.session['statue'] == 'login':
-                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':problems, 'users':users,'h':h})
+                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':users, 'paginator':users,'h':h})
         except:
             return render(request,'collection.html', locals())
 
@@ -139,9 +152,9 @@ def status(request, status):
     h = 'status'
     try:
         if request.session['statue'] == 'login':
-            return render(request, 'status.html', {'login':True,"submission":obj,'name':member.get_name(request), 'users':users, 'h':h})
+            return render(request, 'status.html', {'login':True,"submission":users,'name':member.get_name(request), 'paginator':users, 'h':h})
     except:
-        return render(request, 'status.html', {"submission":obj, 'users':users, 'h':h})
+        return render(request, 'status.html', {"submission":obj, 'paginator':users, 'h':h})
 def info(request):
     return render(request, 'info.html')
 def prob(request, pid):
@@ -150,13 +163,12 @@ def prob(request, pid):
         if request.FILES:
             print(request.FILES)
             newsubmit = submission.objects.create(member=member.objects.get(email=request.session['email']),problem=problem.objects.get(id=pid),lang=request.POST['lang'],code=request.FILES['file'])
-            return redirect('/status')
         elif request.POST['editor']:
             print(request.POST['editor'])
             name = '%s' % (time.time())
             file = open(name, 'w+')
-            file.write(request.POST['editor'])
-            print(type(file))
+            for line in request.POST['editor'].splitlines():
+                file.write(line+'\n')
             newsubmit = submission.objects.create(member=member.objects.get(email=request.session['email']),problem=problem.objects.get(id=pid),lang=request.POST['lang'],code=File(file))
             file.close()
             os.remove(name)
@@ -172,10 +184,7 @@ def prob(request, pid):
 def showsubmission(request, pid):
     submit = submission.objects.get(id=pid)
     place = os.path.join(os.getcwd(), os.path.dirname(str(submit.code).replace('/','\\')))
-    try:
-        out = open(place+"\\out.txt").read()
-    except:
-        out = ''
+    lang = submit.lang
     try:
         error = open(place+"\\error.txt").read()
     except:
@@ -187,13 +196,12 @@ def showsubmission(request, pid):
             code = open(place+"\\code.cpp").read()
         except:
             code = ''
-
     try:
         if request.session['statue'] == 'login':
-            return render(request, 'submission.html', {'login':True,'name':member.get_name(request), 'out':out,'error':error,'code':code})
+            return render(request, 'submission.html', {'login':True,'name':member.get_name(request), 'error':error,'code':code,'lang':lang})
 
     except:
-        return render(request,'submission.html', {'out':out,'error':error,'code':code})
+        return render(request,'submission.html', {'error':error,'code':code,'lang':lang})
 def miner(request):
     try:
         if request.session['statue'] == 'login':
@@ -201,3 +209,10 @@ def miner(request):
 
     except:
         return render(request,'miner.html')
+def deep(request):
+    try:
+        if request.session['statue'] == 'login':
+            return render(request, 'deep.html', {'login':True,'name':member.get_name(request)})
+
+    except:
+        return render(request,'deep.html')
