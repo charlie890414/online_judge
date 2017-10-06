@@ -12,5 +12,5 @@ MAINTAINER charlie890414 charlie890414@gmail.com
 # 更新映像檔的指令
 RUN apt-get update  -y
 RUN apt-get upgrade -y
-RUN apt-get install python3 gcc g++ time -y
+RUN apt-get install python3 gcc g++ golang time -y
 # 建立新容器時要執行的指令
