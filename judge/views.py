@@ -3,6 +3,7 @@ from django.views.decorators import csrf
 from django.shortcuts import redirect
 # Create your views here.
 from django.contrib.auth.hashers import make_password, check_password
+from django.views.decorators.cache import cache_control
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -12,6 +13,7 @@ import time
 import requests
 import json
 
+@cache_control(must_revalidate=True, max_age=60*60*24*365)
 def signup(request):
     if request.method == 'GET':
         return render(request,'signup.html')
