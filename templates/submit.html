@@ -11,10 +11,9 @@
     <meta name="author" content="">
 
     <title>User profile form requirement</title>
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-3dkvEK0WLHRJ7/Csr0BZjAWxERc5WH7bdeUya2aXxdU= sha512-+L4yy6FRcDGbXJ9mPG8MT/3UCDzwR9gPeyFNMCtInsol++5m3bk2bXWKdZjvybmohrAsn3Ua5x8gfLnbE1YkOg==" crossorigin="anonymous">
-    <!-- Bootstrap Core CSS -->
-<!--     <link href="css/bootstrap.min.css" rel="stylesheet"> -->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+
+    {% include "header.html" %}
+       
 
     <!-- Custom CSS -->
     <style>
@@ -102,8 +101,7 @@
 <body>
 
   {% include "navbar.html" %}
-
-   <div class="container">
+<div class="container">
 <div class="row">
 <div class="col-md-10 ">
 <form class="form-horizontal" action="/submit" method="post">
@@ -221,14 +219,12 @@
   <label class="col-md-4 control-label" ></label>
   <div class="col-md-4">
   <button class="button" style="vertical-align:middle" type="submit"><span class="button">Submit</span></button>
-  <a href="#" class="button2" value=""><span class="button2">clear</span></a>
   </div>
 </div>
 </fieldset>
 </form>
 </div>
 <div class="col-md-2 hidden-xs">
-<img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
   </div>
 </div>
    </div>
