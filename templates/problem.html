@@ -19,9 +19,22 @@
                     {{ problem.title }}
                 </div>
             </div>
+            {% if problem.PDFcontext %}
             <div class="card" style="margin:20px;">
                 <div class="card-header">
-                        Context
+                    Context
+                </div>
+                <div class="card-body" style="padding:0px;">
+                    <iframe src="https://docs.google.com/gview?embedded=true&url=https://charlie890414.com/{{ problem.PDFcontext }}" id = "pdf" style="width:100%; height:500px;" frameborder="0"></iframe>
+                </div>
+            </div>          
+            <script>
+                $('#pdf').height($(document).height());
+            </script>
+            {% else %} 
+            <div class="card" style="margin:20px;">
+                <div class="card-header">
+                    Context
                 </div>
                 <div class="card-body">
                     <pre style="white-space: pre-wrap;word-wrap: break-word;">{{ problem.context }}</pre>
@@ -29,21 +42,22 @@
             </div>
             <div class="card" style="margin:20px;">
                 <div class="card-header">
-                        Sample input & output
+                    Sample input & output
                 </div>
                 <div class="card-body">
-                        <label>Input:</label>         
-                        <pre style="color: #DDD;
+                    <label>Input:</label>         
+                    <pre style="color: #DDD;
                         border-radius: 2px;
                         padding: 0.5em;
                         background: #272822;">{{ problem.samplein }}</pre>
-                        <label>Output:</label>         
-                        <pre style="color: #DDD;
+                    <label>Output:</label>         
+                    <pre style="color: #DDD;
                         border-radius: 2px;
                         padding: 0.5em;
                         background: #272822;">{{ problem.sampleout }}</pre>  
                 </div>
             </div>
+            {% endif %}
             <div class="card" style="margin:20px;margin-bottom:20%;">
                 <div class="card-header">
                     Submit
@@ -77,7 +91,7 @@
                             <br>
                             <label>File upload</label>
                             <br>
-                            <input type="file" class="filestyle" name='file' data-text="Browse">
+                            <input type="file" class="filestyle" name='file' data-text="Browse" required>
                         </div>
                         <br>
                         {% csrf_token %}
@@ -92,15 +106,19 @@
         $('div.file_upload').show();
         $('div#editor').hide()
         $('div#texteditor').hide()        
-        $('a#File_upload').click(function(){
+        $('a#File_upload').click(function(){            
+            $('textarea[name="editor"]').removeAttr("required");            
+            $(".filestyle").attr('required', 'required'); 
             $('div.file_upload').show();
-            $('div#editor').hide()
-            $('div#texteditor').hide()     
+            $('div#editor').hide();
+            $('div#texteditor').hide();    
         })
         $('a#Editor').click(function(){
+            $(".filestyle").removeAttr("required");
+            $('textarea[name="editor"]').attr('required', 'required');
             $('div.file_upload').hide();
-            $('div#texteditor').show() 
-            $('div#editor').show()    
+            $('div#texteditor').show(); 
+            $('div#editor').show();   
             var editor = ace.edit('editor');
             var textarea = $('textarea[name="editor"]');
             editor.setTheme("ace/theme/chrome");
