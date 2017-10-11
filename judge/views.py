@@ -19,13 +19,13 @@ def signup(request):
         return render(request,'signup.html')
     elif request.method == 'POST':
             print(request.POST)
-            url = 'https://api.coinhive.com/token/verify'
+            url = 'https://www.google.com/recaptcha/api/siteverify'
             headers = {'Content-type':'application/x-www-form-urlencoded\r\n'}
-            data = {'secret' : "4rDiVo40ogqPc7ODxW4MBdMfelAAgxCb", 'token' : request.POST['coinhive-captcha-token'],'hashes' : 256}
+            data = {'secret' : "6Lcn8DIUAAAAAMr-HSW-c2mrXbYyBqLKYOMm_21Z", 'response' : request.POST['g-recaptcha-response']}
             r = requests.request('POST',url, data=data)
             print(json.loads(r.content))
             if json.loads(r.content)['success'] == False:
-                return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": json.loads(r.content)['error']})
+                return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": json.loads(r.content)['error-codes']})
             if request.POST['password'] != request.POST['repassword']:
                 return render(request,'signup.html',{"email": request.POST['email'],"name": request.POST['name'],"error": "password are not the same "})
             try :                
@@ -218,3 +218,5 @@ def deep(request):
 
     except:
         return render(request,'deep.html')
+def sitemap(request):
+    return render(request,'sitemap.xml')

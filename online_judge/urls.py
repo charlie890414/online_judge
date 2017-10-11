@@ -19,6 +19,7 @@ from judge.views import *
 
 from django.conf.urls.static import static
 from .settings import STATIC_URL
+from django.contrib.sitemaps import Sitemap
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -37,4 +38,5 @@ urlpatterns = [
     url(r'^info', info),
     url(r'^problem=(\d+)', prob),
     url(r'^submission=(\d+)', showsubmission),
+    url(r'^sitemap\.xml$', sitemap ,name='django.contrib.sitemaps.views.sitemap'),
 ]+ static(STATIC_URL, document_root=STATIC_URL)
