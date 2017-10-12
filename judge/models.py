@@ -1,3 +1,4 @@
+import os
 from django.db import models
 import datetime
 from django.contrib.auth.hashers import make_password, check_password
@@ -55,12 +56,15 @@ class new(models.Model):
         return self.title
 def generate_PDF(self, filename):
     url = "static/question/%s/context.pdf" % (self.title.replace(' ','_'))
+    os.remove(url)
     return url
 def generate_questionfiletest(self, filename):
     url = "static/question/%s/test.txt" % (self.title.replace(' ','_'))
+    os.remove(url)
     return url
 def generate_questionfileans(self, filename):
     url = "static/question/%s/ans.txt" % (self.title.replace(' ','_'))
+    os.remove(url)
     return url
 class problem(models.Model):
     title = models.CharField(max_length=30,unique=True)
@@ -80,6 +84,7 @@ def generate_submissionfilename(self, filename):
     elif self.lang == "c++":
         file='cpp'
     url = "static/submission/%s/%s/%s/code.%s" % (self.member.name,self.problem.id,datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"),file)
+    os.remove(url)
     return url
 class submission(models.Model):
     member = models.ForeignKey('member',to_field = 'name')

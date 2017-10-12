@@ -13,7 +13,6 @@ import time
 import requests
 import json
 
-@cache_control(must_revalidate=True, max_age=60*60*24*365)
 def signup(request):
     if request.method == 'GET':
         return render(request,'signup.html')
@@ -77,7 +76,7 @@ def paginate(request, pg, user_list):
 
 
 def ranks(request, rank):
-    user_list = member.objects.order_by('AC').reverse()
+    user_list = member.objects.order_by('-AC','update')
     users = paginate(request, rank, user_list)
     h = 'rank'
     print (h)
@@ -158,7 +157,11 @@ def status(request, status):
     except:
         return render(request, 'status.html', {"submission":obj, 'paginator':users, 'h':h})
 def info(request):
-    return render(request, 'info.html')
+    try:
+        if request.session['statue'] == 'login':
+            return render(request, 'info.html', {'login':True,'name':member.get_name(request)})
+    except:
+        return render(request, 'info.html')
 def prob(request, pid):
     print(request.POST)
     if request.method == 'POST':
