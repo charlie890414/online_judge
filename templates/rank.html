@@ -15,7 +15,7 @@
                         <th style="text-align:center;">#</th>
                         <th style="text-align:center;">Name</th>
                         <th style="text-align:center;">AC</th>
-                        <th style="text-align:center;">Last edit time</th>
+                        <th style="text-align:center;">Create time</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -24,7 +24,7 @@
                             <td align="center">{{ u.id }}</td>
                             <td align="center"><a href="/profile={{ u.name }}" style="color:black;">{{ u.name }}</a> </td>
                             <td align="center">{{ u.AC }}</td>
-                            <td align="center">{{ u.update }}</td>
+                            <td align="center">{{ u.create }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
