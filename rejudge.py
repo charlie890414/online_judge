@@ -13,3 +13,4 @@ if __name__ == '__main__':
     for user in users:
         member.objects.filter(id=user.id).update(AC_problem='')
         member.objects.filter(id=user.id).update(AC=0)
+        member.objects.filter(id=user.id).update(update=0)

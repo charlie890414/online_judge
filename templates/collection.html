@@ -35,7 +35,7 @@
                                             <td align="center">{{ n.id }}</td>
                                             <td align="center"><a href="/problem={{ n.id }}">{{ n.title }}</a></td>
                                             <td align="center">{{ n.author }}</td>
-                                            <td align="center"></td>
+                                            <td align="center">{% if n.id in user_AC %}AC{% endif %}</td>
                                         </tr>
                                         {% endfor %}
                                     </tbody>

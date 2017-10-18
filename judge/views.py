@@ -83,10 +83,8 @@ def ranks(request, rank):
     try:
         if request.session['statue'] == 'login':
             return render(request,'rank.html', {'login':True, 'name':member.get_name(request), 'paginator': users,'users':users,'h':h})
-        else:
-            return render(request,'rank.html', {'paginator': users, 'h':h, 'users':users})
     except:
-        return render(request,'rank.html', locals())
+        return render(request,'rank.html', {'paginator': users, 'h':h, 'users':users})
 
 
 
@@ -109,7 +107,9 @@ def collection(request, collection):
         print(problems)
         try:
             if request.session['statue'] == 'login':
-                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':users, 'paginator':users,'h':h})
+                print(member.objects.get(email=request.session['email']).get_AC())
+                results = [int(i) for i in member.objects.get(email=request.session['email']).get_AC()]
+                return render(request,'collection.html',{'login':True,'name':member.get_name(request),'problems':users, 'paginator':users,'h':h, 'user_AC':results })
         except:
             return render(request,'collection.html', locals())
 
@@ -155,7 +155,7 @@ def status(request, status):
         if request.session['statue'] == 'login':
             return render(request, 'status.html', {'login':True,"submission":users,'name':member.get_name(request), 'paginator':users, 'h':h})
     except:
-        return render(request, 'status.html', {"submission":obj, 'paginator':users, 'h':h})
+        return render(request, 'status.html', {"submission":users, 'paginator':users, 'h':h})
 def info(request):
     try:
         if request.session['statue'] == 'login':

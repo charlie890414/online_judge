@@ -1,4 +1,5 @@
 import os
+from jsonfield import JSONField
 from django.db import models
 import datetime
 from django.utils import timezone
@@ -10,6 +11,7 @@ class member(models.Model):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
     AC = models.IntegerField(default=0)
+    AC_test = JSONField(blank=True)
     AC_problem = models.TextField(default="",blank=True)
     overview = models.CharField(max_length=500, default="",blank=True)
     pphone = models.CharField(blank=True,default="",max_length=10)
@@ -40,6 +42,7 @@ class member(models.Model):
         del request.session['statue']
         del request.session['email']
         return request
+    
     def get_AC(self):
         return str(self.AC_problem).split()
 
