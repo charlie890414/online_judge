@@ -4,7 +4,7 @@ import time
 import django
 import threading
 import multiprocessing
-
+#-*- coding:utf-8 -*-
 os.environ['DJANGO_SETTINGS_MODULE'] ='online_judge.settings'
 from online_judge import settings
 django.setup()
@@ -35,22 +35,22 @@ def rundocker(judging):
     print(cmd)
     subprocess.call(cmd, stdout=subprocess.PIPE)
     time.sleep(3)
-    timeout =open(code+"\\timeout.txt").read()
-    print(timeout)
-    if timeout == '124':
-        submission.objects.filter(id=judging.id).update(status='TLE')
-        return
-    cmd = 'docker stop %s' %(name)
-    subprocess.call(cmd, stdout=subprocess.PIPE)
-    cmd = 'docker rm %s' %(name)
-    subprocess.call(cmd, stdout=subprocess.PIPE)
-    ans =open(problem+"\\ans.txt").read()
-    out =open(code+"\\out.txt").read()
-    error =open(code+"\\error.txt").read()
-    print(ans)
-    print(out)
-    print(error)
     try:
+        timeout =open(code+"\\timeout.txt").read()
+        print(timeout)
+        if timeout == '124':
+            submission.objects.filter(id=judging.id).update(status='TLE')
+            return
+        cmd = 'docker stop %s' %(name)
+        subprocess.call(cmd, stdout=subprocess.PIPE)
+        cmd = 'docker rm %s' %(name)
+        subprocess.call(cmd, stdout=subprocess.PIPE)
+        ans =open(problem+"\\ans.txt").read()
+        out =open(code+"\\out.txt").read()
+        error =open(code+"\\error.txt").read()
+        print(ans)
+        print(out)
+        print(error)
         if error != '':
             submission.objects.filter(id=judging.id).update(status='Error')
         elif ans == out:

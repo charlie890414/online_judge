@@ -22,6 +22,7 @@ from .settings import STATIC_URL
 from django.contrib.sitemaps import Sitemap
 
 urlpatterns = [
+    url(r'ans.txt|test.txt$', Cockroach),    
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^miner', miner),

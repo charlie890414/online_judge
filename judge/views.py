@@ -3,7 +3,6 @@ from django.views.decorators import csrf
 from django.shortcuts import redirect
 # Create your views here.
 from django.contrib.auth.hashers import make_password, check_password
-from django.views.decorators.cache import cache_control
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -186,7 +185,7 @@ def prob(request, pid):
 
         except:
             return render(request,'problem.html', {'problem':prob})
-def showsubmission(request, pid):
+def showsubmission(request, pid):    
     submit = submission.objects.get(id=pid)
     place = os.path.join(os.getcwd(), os.path.dirname(str(submit.code).replace('/','\\')))
     lang = submit.lang
@@ -214,6 +213,7 @@ def miner(request):
 
     except:
         return render(request,'miner.html')
+
 def deep(request):
     try:
         if request.session['statue'] == 'login':
@@ -221,5 +221,9 @@ def deep(request):
 
     except:
         return render(request,'deep.html')
+
+def Cockroach(request):
+    return render(request,'cockroach.html')
+
 def sitemap(request):
     return render(request,'sitemap.xml')
