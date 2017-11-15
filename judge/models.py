@@ -93,7 +93,7 @@ def generate_submissionfilename(self, filename):
         file='py'
     elif self.lang == "c++":
         file='cpp'
-    url = "static/submission/%s/%s/%s/code.%s" % (self.member.name,self.problem.id,datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"),file)
+    url = "static/submission/%s/%s/%s/code.%s" % (str(self.member.name).replace(' ','_'),self.problem.id,datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S"),file)
     try:
         os.remove(url)
     finally:

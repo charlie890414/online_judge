@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.decorators import csrf
 from django.shortcuts import redirect
+from django.contrib import auth
+from django.http import HttpResponse
 # Create your views here.
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
@@ -223,7 +225,12 @@ def deep(request):
         return render(request,'deep.html')
 
 def Cockroach(request):
-    return render(request,'cockroach.html')
+    if request.user.is_authenticated:
+        print(request.path[21:])
+        print(open(request.path[21:]).read())
+        return HttpResponse(open(request.path[21:]).read(), content_type="text/plain")
+    else:
+        return render(request,'cockroach.html')
 
 def sitemap(request):
     return render(request,'sitemap.xml')
