@@ -3,14 +3,14 @@
 # Author: docker_user
 # Command format: Instruction [arguments / command] ..
 
-# 基本映像檔，必須是第一個指令
 FROM ubuntu
 
-# 維護者： docker_user <docker_user at email.com> (@docker_user)
-MAINTAINER charlie890414 charlie890414@gmail.com
-
-# 更新映像檔的指令
 RUN apt-get update  -y
 RUN apt-get upgrade -y
-RUN apt-get install python3 gcc g++ golang time -y
-# 建立新容器時要執行的指令
+RUN apt-get install python3 gcc g++ time -y
+
+COPY run.sh run.sh
+
+RUN chmod +x run.sh
+
+ENTRYPOINT [ "sh", "run.sh" ]

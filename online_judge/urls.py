@@ -19,14 +19,10 @@ from judge.views import *
 
 from django.conf.urls.static import static
 from .settings import STATIC_URL
-from django.contrib.sitemaps import Sitemap
 
 urlpatterns = [
-    url(r'ans.txt|test.txt$', Cockroach),    
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin', admin.site.urls),
     url(r'^$', index),
-    url(r'^miner', miner),
-    url(r'^deep+', deep),
     url(r'^signup', signup),
     url(r'^signin', signin),
     url(r'^logout', logout),
@@ -39,5 +35,4 @@ urlpatterns = [
     url(r'^info', info),
     url(r'^problem=(\d+)', prob),
     url(r'^submission=(\d+)', showsubmission),
-    url(r'^sitemap\.xml$', sitemap ,name='django.contrib.sitemaps.views.sitemap'),
-]+ static(STATIC_URL, document_root=STATIC_URL)
+] + static(STATIC_URL, document_root=STATIC_URL)

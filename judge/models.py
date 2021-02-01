@@ -78,7 +78,7 @@ def generate_questionfileans(self, filename):
         return url
 class problem(models.Model):
     title = models.CharField(max_length=30,unique=True)
-    author = models.ForeignKey('member',to_field = 'name')
+    author = models.ForeignKey('member',to_field = 'name', on_delete=models.CASCADE)
     PDFcontext = models.FileField(upload_to=generate_PDF,null=True,blank=True)
     context = models.TextField(blank=True)
     samplein = models.TextField(default="(None)")
@@ -99,8 +99,8 @@ def generate_submissionfilename(self, filename):
     finally:
         return url
 class submission(models.Model):
-    member = models.ForeignKey('member',to_field = 'name')
-    problem = models.ForeignKey('problem',to_field = 'title')
+    member = models.ForeignKey('member',to_field = 'name', on_delete=models.CASCADE)
+    problem = models.ForeignKey('problem',to_field = 'title', on_delete=models.CASCADE)
     status = models.CharField(max_length=20,default='waiting')
     lang = models.CharField(max_length=15,default='')
     code = models.FileField(upload_to=generate_submissionfilename)
